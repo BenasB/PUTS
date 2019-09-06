@@ -35,3 +35,12 @@ body {
         display: none;
     }
 }
+
+footer p {
+    display: inline-block;
+}
+
+footer form {
+    display: inline-block;
+}
+

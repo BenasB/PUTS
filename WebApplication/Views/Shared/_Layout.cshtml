@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,13 +30,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Programavimo Uždavinių Tikrinimo Sistema</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">@Localizer["Programming Exercises Assessment System"]</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                 </ul>
             </div>
         </div>
@@ -44,7 +48,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - WebApplication</p>
+            <p>&copy; 2019 - PUTS</p>
+            @{var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}"; }
+            <form id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
+                <button class="btn btn-link" type="submit" name="culture" value="lt-LT">LT</button>
+                <p>|</p>
+                <button class="btn btn-link" type="submit" name="culture" value="en-US">EN</button>
+            </form>
         </footer>
     </div>
 
