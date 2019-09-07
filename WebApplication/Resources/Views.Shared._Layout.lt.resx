@@ -129,4 +129,13 @@
   <data name="Programming Exercises Assessment System" xml:space="preserve">
     <value>Programavimo Uždavinių Tikrinimo Sistema</value>
   </data>
+  <data name="Sign In" xml:space="preserve">
+    <value>Prisijungti</value>
+  </data>
+  <data name="Sign Out" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Sign Up" xml:space="preserve">
+    <value>Registruotis</value>
+  </data>
 </root>

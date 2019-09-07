@@ -21,8 +21,8 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -38,6 +38,20 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                 </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-log-in"></span> @Localizer["Sign In"]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-user"></span> @Localizer["Sign Up"]</a></li>
+                </ul>
+
+                @{var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}"; }
+                <form class="navbar-form navbar-right" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-link" type="submit" name="culture" value="lt-LT">LT</button>
+                        <button class="btn btn-link" type="submit" name="culture" value="en-US">EN</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </nav>
@@ -46,16 +60,6 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - PUTS</p>
-            @{var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}"; }
-            <form id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
-                <button class="btn btn-link" type="submit" name="culture" value="lt-LT">LT</button>
-                <p>|</p>
-                <button class="btn btn-link" type="submit" name="culture" value="en-US">EN</button>
-            </form>
-        </footer>
     </div>
 
     <environment include="Development">
