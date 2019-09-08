@@ -126,14 +126,14 @@
   <data name="Home" xml:space="preserve">
     <value>Namai</value>
   </data>
-  <data name="Programming Exercises Assessment System" xml:space="preserve">
+  <data name="Programming Problems Testing System" xml:space="preserve">
     <value>Programavimo Uždavinių Tikrinimo Sistema</value>
   </data>
   <data name="Sign In" xml:space="preserve">
     <value>Prisijungti</value>
   </data>
   <data name="Sign Out" xml:space="preserve">
-    <value />
+    <value>Atsijungti</value>
   </data>
   <data name="Sign Up" xml:space="preserve">
     <value>Registruotis</value>

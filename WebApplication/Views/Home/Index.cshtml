@@ -1,4 +1,11 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿<environment include="Development">
+    <link rel="stylesheet" href="~/css/index.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/index.min.css" asp-append-version="true" />
+</environment>
+
+@using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
 
@@ -6,5 +13,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>@Localizer["Hello"]</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit finibus dui, vitae lacinia turpis tincidunt non. Mauris finibus semper felis non vehicula. In in urna aliquam, facilisis nisi vel, ultricies tortor. Aliquam imperdiet est nec magna semper, at mattis libero pellentesque. Suspendisse convallis commodo odio. Phasellus porta fringilla nisi, facilisis ullamcorper mauris euismod quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper quam vel augue gravida, sit amet tincidunt arcu tincidunt. Duis ac leo at elit sollicitudin pellentesque et at erat. Nunc non mollis nunc. Aliquam erat volutpat. Curabitur eu neque massa. Cras sed enim diam. Maecenas dui nulla, faucibus eu felis scelerisque, interdum posuere ex. Nunc feugiat risus turpis, non molestie dui volutpat sollicitudin.</p>
+<div class="text-center"><img src="~/images/Logo.png" alt="Logo icon" /></div>
+<h1 class="text-center">@Localizer["Welcome to PUTS!"]</h1>
+
+<h2 class="text-center">@Localizer["Using PUTS is easy"]</h2>
+
+<div id="instruction">
+    <div class="text-center"><img src="~/images/Intro1.png" class="img-thumbnail" alt="Solve a problem" /></div>
+    <h3 class="text-center">@Localizer["Solve a problem"]</h3>
+</div>
+
+<div id="instruction">
+    <div class="text-center"><img src="~/images/Intro2.png" class="img-thumbnail" alt="Upload your solution" /></div>
+    <h3 class="text-center">@Localizer["Upload your solution"]</h3>
+</div>
+
+<div id="instruction">
+    <div class="text-center"><img src="~/images/Intro3.png" class="img-thumbnail" alt="Let PUTS test it for you" /></div>
+    <h3 class="text-center">@Localizer["Let PUTS test it for you"]</h3>
+</div>
+
+<div id="instruction">
+    <div class="text-center"><img src="~/images/Intro4.png" class="img-thumbnail" alt="Get the results" /></div>
+    <h3 class="text-center">@Localizer["Get the results"]</h3>
+</div>

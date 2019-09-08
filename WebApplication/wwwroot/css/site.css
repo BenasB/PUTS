@@ -1,15 +1,16 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-nav {
+﻿nav {
     padding-right: 20px;
 }
 
 .navbar {
     background-color: rgb(51,51,51);
     border:none;
+    border-radius: 0px;
+}
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 14px;
+    }
 }
 
 .body-content {

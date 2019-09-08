@@ -1,0 +1,15 @@
+﻿h1 {
+    font-size: 48px;
+    margin: 0px 0px 50px 0px;
+}
+
+h2{
+    margin-bottom: 20px;
+}
+
+#instruction {
+    padding: 10px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
