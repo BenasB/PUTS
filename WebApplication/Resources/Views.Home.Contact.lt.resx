@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Get the results" xml:space="preserve">
-    <value>Sužinok rezultatus</value>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontaktai</value>
   </data>
-  <data name="Home Page" xml:space="preserve">
-    <value>Namai</value>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefonas</value>
   </data>
-  <data name="Let PUTS test it for you" xml:space="preserve">
-    <value>Leisk PUTS jį patikrinti</value>
-  </data>
-  <data name="Solve a problem" xml:space="preserve">
-    <value>Išspręsk uždavinį</value>
-  </data>
-  <data name="Upload your solution" xml:space="preserve">
-    <value>Įkelk savo sprendimą</value>
-  </data>
-  <data name="Using PUTS is easy" xml:space="preserve">
-    <value>Naudoti PUTS lengva</value>
-  </data>
-  <data name="Welcome to PUTS!" xml:space="preserve">
-    <value>Sveiki atvykę į PUTS!</value>
+  <data name="Support" xml:space="preserve">
+    <value>Pagalba</value>
   </data>
 </root>
