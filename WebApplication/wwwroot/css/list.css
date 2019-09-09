@@ -1,0 +1,12 @@
+﻿h1 {
+    display: inline;
+}
+
+.btn-primary {
+    float: right;
+}
+
+#Title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}

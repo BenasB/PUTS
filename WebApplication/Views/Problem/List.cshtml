@@ -1,0 +1,39 @@
+﻿<environment include="Development">
+    <link rel="stylesheet" href="~/css/list.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/list.min.css" asp-append-version="true" />
+</environment>
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Problems"];
+}
+
+@model List<Problem>
+
+<div id="Title">
+    <h1>@Localizer["Problems"]</h1>
+
+    <a class="btn btn-primary" asp-action="Create">@Localizer["New"]</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">@Localizer["Name"]</th>
+            <th scope="col">@Localizer["Description"]</th>
+        </tr>
+    </thead>
+
+    @{
+        foreach (Problem p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Description</td>
+            </tr>
+        }
+    }
+</table>

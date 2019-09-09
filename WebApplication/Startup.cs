@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace WebApplication
@@ -29,6 +30,7 @@ namespace WebApplication
             });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddDbContext<ProblemDbContext>(options => options.UseMySql(Configuration.GetConnectionString("ProblemDatabase")));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
