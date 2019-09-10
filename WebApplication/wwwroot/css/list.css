@@ -2,11 +2,24 @@
     display: inline;
 }
 
-.btn-primary {
+.btn-success {
+    float: right;
+}
+
+.btn-group {
     float: right;
 }
 
 #Title {
     margin-top: 30px;
     margin-bottom: 10px;
+}
+
+#deletionModalLabel
+{
+    display: inline;
+}
+
+.modal-footer form {
+    display: inline;
 }

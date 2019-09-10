@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public string Description { get; set; }
         
+        // string InputDesc
+        // string OutputDesc
         // public List<Test> Tests { get; set; }
     }
 }
