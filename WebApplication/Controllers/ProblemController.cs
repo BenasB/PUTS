@@ -27,7 +27,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind ("Name, Description")]Problem model)
+        public async Task<IActionResult> Create([Bind ("Name, Description", "InputDescription", "OutputDescription", "Tests")]Problem model)
         {
             try
             {

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ProblemDbContext))]
-    partial class ProblemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190911210845_UpdatedProblemModel")]
+    partial class UpdatedProblemModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
