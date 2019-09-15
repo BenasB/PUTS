@@ -117,34 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="At least 1 test must exist" xml:space="preserve">
-    <value>Turi egzistuoti bent 1 testas</value>
+  <data name="Expected Output" xml:space="preserve">
+    <value>Tikėtina išvestis</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Sąlyga</value>
+  <data name="Expected output must exist" xml:space="preserve">
+    <value>Tikėtina išvestis turi egzistuoti</value>
   </data>
-  <data name="Input" xml:space="preserve">
-    <value>Įvestis</value>
+  <data name="Given Input" xml:space="preserve">
+    <value>Pateikiama įvestis</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Pavadinimas</value>
-  </data>
-  <data name="Output" xml:space="preserve">
-    <value>Išvestis</value>
-  </data>
-  <data name="Please create a description" xml:space="preserve">
-    <value>Sukurkite sąlygą</value>
-  </data>
-  <data name="Please desribe the input" xml:space="preserve">
-    <value>Apibūdinkite įvestį</value>
-  </data>
-  <data name="Please desribe the output" xml:space="preserve">
-    <value>Apibūdinkite išvestį</value>
-  </data>
-  <data name="Please specify the name" xml:space="preserve">
-    <value>Nurodykite pavadinimą</value>
-  </data>
-  <data name="Tests" xml:space="preserve">
-    <value>Testai</value>
+  <data name="Use as an example" xml:space="preserve">
+    <value>Naudoti kaip pavyzdį</value>
   </data>
 </root>

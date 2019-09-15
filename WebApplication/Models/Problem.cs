@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebApplication.Helpers;
 
 namespace WebApplication.Models
 {
@@ -8,40 +8,36 @@ namespace WebApplication.Models
     {
         public int ID { get; set; }
 
+        [Display (Name = "Name")]
         [Required (ErrorMessage = "Please specify the name")]
         public string Name { get; set; }
 
+        [Display (Name = "Description")]
         [Required (ErrorMessage = "Please create a description")]
         public string Description { get; set; }
 
+        [Display (Name = "Input")]
         [Required (ErrorMessage = "Please desribe the input")]
         public string InputDescription { get; set; }
 
+        [Display(Name = "Output")]
         [Required(ErrorMessage = "Please desribe the output")]
         public string OutputDescription { get; set; }
 
+        private List<Test> tests;
+
+        [Display(Name = "Tests")]
         [MinimumCount(1, ErrorMessage = "At least 1 test must exist")]
-        public List<Test> Tests { get; set; } = new List<Test>();
-    }
-
-    public class MinimumCount : ValidationAttribute
-    {
-        private readonly int minimumElements;
-
-        public MinimumCount(int min)
+        public List<Test> Tests
         {
-            minimumElements = min;
-        }
-
-        public override bool IsValid(object value)
-        {
-            var collection = value as ICollection;
-            if (collection != null)
+            get
             {
-                return collection.Count >= minimumElements;
-            }
+                if (tests == null)
+                    tests = new List<Test>();
 
-            return false;
+                return tests;
+            }
+            set { tests = value; }
         }
     }
 }

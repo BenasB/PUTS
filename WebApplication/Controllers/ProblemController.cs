@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApplication.Models;
 
@@ -17,17 +17,24 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> List()
         {
-            return View(await dbContext.Problems.ToListAsync());
+            List<Problem> problemList = await dbContext.Problems.Include(m => m.Tests).ToListAsync();
+            return View(problemList);
         }
 
         public IActionResult Create()
         {
-            return View();
+            Problem p = new Problem();
+            return View(p);
+        }
+
+        public PartialViewResult TestCreator()
+        {
+            return PartialView("TestCreatorPartial", new Test());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind ("Name, Description", "InputDescription", "OutputDescription", "Tests")]Problem model)
+        public async Task<IActionResult> Create(Problem model)
         {
             try
             {
@@ -41,7 +48,7 @@ namespace WebApplication.Controllers
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Unable to save changes");
+                ModelState.AddModelError("", "Unable to create a problem");
             }
 
             return View(model);

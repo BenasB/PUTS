@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using WebApplication.Helpers;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace WebApplication
 {
@@ -31,6 +33,7 @@ namespace WebApplication
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddDbContext<ProblemDbContext>(options => options.UseMySql(Configuration.GetConnectionString("ProblemDatabase")));
+            services.AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)

@@ -9,8 +9,8 @@ using WebApplication;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(ProblemDbContext))]
-    [Migration("20190911210845_UpdatedProblemModel")]
-    partial class UpdatedProblemModel
+    [Migration("20190915173120_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,12 +27,14 @@ namespace WebApplication.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<string>("InputDescription");
+                    b.Property<string>("InputDescription")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("OutputDescription");
+                    b.Property<string>("OutputDescription")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -44,7 +46,8 @@ namespace WebApplication.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ExpectedOutput");
+                    b.Property<string>("ExpectedOutput")
+                        .IsRequired();
 
                     b.Property<string>("GivenInput");
 

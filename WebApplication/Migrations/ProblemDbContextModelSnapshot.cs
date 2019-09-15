@@ -25,12 +25,14 @@ namespace WebApplication.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<string>("InputDescription");
+                    b.Property<string>("InputDescription")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("OutputDescription");
+                    b.Property<string>("OutputDescription")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -42,7 +44,8 @@ namespace WebApplication.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ExpectedOutput");
+                    b.Property<string>("ExpectedOutput")
+                        .IsRequired();
 
                     b.Property<string>("GivenInput");
 

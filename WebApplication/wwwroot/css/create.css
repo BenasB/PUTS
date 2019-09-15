@@ -3,3 +3,26 @@
     max-width: 100%;
     min-height: 100px;
 }
+
+.test-case{
+    background-color:rgb(250,250,250);
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-color: lightgray;
+    border-width: 2px;
+    border-style: double;
+}
+
+form h4{
+    font-weight: bold;
+    display: inline;
+}
+
+form .btn-danger{
+    float: right;
+}
+
+.checkbox-inline {
+    margin-top: 0px !important;
+}
