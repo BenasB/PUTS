@@ -44,6 +44,9 @@ namespace WebApplication.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("ExpectedOutput")
                         .IsRequired();
 
@@ -56,6 +59,23 @@ namespace WebApplication.Migrations
                     b.HasIndex("ProblemID");
 
                     b.ToTable("Test");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Test");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.Example", b =>
+                {
+                    b.HasBaseType("WebApplication.Models.Test");
+
+                    b.Property<string>("Explanation");
+
+                    b.Property<int?>("ProblemID1");
+
+                    b.HasIndex("ProblemID1");
+
+                    b.ToTable("Example");
+
+                    b.HasDiscriminator().HasValue("Example");
                 });
 
             modelBuilder.Entity("WebApplication.Models.Test", b =>
@@ -63,6 +83,13 @@ namespace WebApplication.Migrations
                     b.HasOne("WebApplication.Models.Problem")
                         .WithMany("Tests")
                         .HasForeignKey("ProblemID");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.Example", b =>
+                {
+                    b.HasOne("WebApplication.Models.Problem")
+                        .WithMany("Examples")
+                        .HasForeignKey("ProblemID1");
                 });
 #pragma warning restore 612, 618
         }

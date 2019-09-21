@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="~/css/create.min.css" asp-append-version="true" />
 </environment>
 
+@section Scripts
+    {
+    <script src="~/js/create.js"></script>
+}
+
 @model WebApplication.Models.Problem
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
@@ -42,6 +47,22 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.Examples, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Examples, "", new { @class = "text-danger" })
+    </div>
+
+    <div id="examples">
+        @for (int i = 0; i < Model.Examples.Count; i++)
+        {
+            <partial name="ExampleCreatorPartial" for="Examples[i]" />
+        }
+    </div>
+
+    <div class="form-group">
+        <a href="/Problem/ExampleCreator" class="btn btn-success form-control" id="add-example">@Localizer["Add example"]</a>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.Tests, new { @class = "control-label" })
         @Html.ValidationMessageFor(m => m.Tests, "", new { @class = "text-danger" })
     </div>
@@ -65,19 +86,3 @@
 <div>
     <a asp-action="List">@Localizer["Back to List"]</a>
 </div>
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $('#add-test').click(function () {
-            $.ajax({
-                url: this.href,
-                cache: false,
-                success: function (html) {
-                    $('#tests').append(html);
-                }
-            });
-            return false;
-        });
-    </script>
-}

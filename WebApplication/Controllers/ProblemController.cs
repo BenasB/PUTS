@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> List()
         {
-            List<Problem> problemList = await dbContext.Problems.Include(m => m.Tests).ToListAsync();
+            List<Problem> problemList = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).ToListAsync();
             return View(problemList);
         }
 
@@ -30,6 +30,11 @@ namespace WebApplication.Controllers
         public PartialViewResult TestCreator()
         {
             return PartialView("TestCreatorPartial", new Test());
+        }
+
+        public PartialViewResult ExampleCreator()
+        {
+            return PartialView("ExampleCreatorPartial", new Example());
         }
 
         [HttpPost]

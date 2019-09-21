@@ -1,0 +1,35 @@
+﻿@model WebApplication.Models.Example
+@using HtmlHelpers.BeginCollectionItemCore;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div class="example-case">
+    @using (Html.BeginCollectionItem("Examples"))
+    {
+        <a href="#" class="btn btn-danger btn-xs delete-example">@Localizer["Delete test"]</a>
+        
+        <div class="form-group ">
+            @Html.LabelFor(m => m.GivenInput, new { @class = "control-label" })
+            @Html.TextAreaFor(m => m.GivenInput, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group ">
+            @Html.LabelFor(m => m.ExpectedOutput, new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.ExpectedOutput, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(m => m.ExpectedOutput, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Explanation, new { @class = "control-label" })
+            @Html.ValidationMessageFor(m => m.Explanation, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(m => m.Explanation, new { @class = "form-control" })
+        </div>
+    }
+</div>
+
+<script>
+    $('a.delete-example').on('click', function () {
+        $(this).parents('div.example-case:first').remove();
+        return false;
+    });
+</script>

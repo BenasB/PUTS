@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add example" xml:space="preserve">
-    <value>Pridėti pavyzdį</value>
-  </data>
-  <data name="Add new test" xml:space="preserve">
-    <value>Pridėti naują testą</value>
-  </data>
-  <data name="Back to List" xml:space="preserve">
-    <value>Atgal į sąrašą</value>
-  </data>
-  <data name="Create" xml:space="preserve">
-    <value>Kurti</value>
-  </data>
-  <data name="New problem" xml:space="preserve">
-    <value>Naujas uždavinys</value>
-  </data>
-  <data name="Test" xml:space="preserve">
-    <value>Testas</value>
+  <data name="Explanation" xml:space="preserve">
+    <value>Paaiškinimas</value>
   </data>
 </root>

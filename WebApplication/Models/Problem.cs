@@ -24,20 +24,11 @@ namespace WebApplication.Models
         [Required(ErrorMessage = "Please desribe the output")]
         public string OutputDescription { get; set; }
 
-        private List<Test> tests;
+        [Display(Name = "Examples")]
+        public List<Example> Examples { get; set; } = new List<Example>();
 
         [Display(Name = "Tests")]
         [MinimumCount(1, ErrorMessage = "At least 1 test must exist")]
-        public List<Test> Tests
-        {
-            get
-            {
-                if (tests == null)
-                    tests = new List<Test>();
-
-                return tests;
-            }
-            set { tests = value; }
-        }
+        public List<Test> Tests { get; set; } = new List<Test>();
     }
 }
