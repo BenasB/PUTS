@@ -1,40 +1,94 @@
-﻿@model WebApplication.Models.Problem
+﻿<environment include="Development">
+    <link rel="stylesheet" href="~/css/edit.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/edit.min.css" asp-append-version="true" />
+</environment>
 
-<h4>Problem</h4>
+@model WebApplication.Models.Problem
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Edit"];
+}
+
+@section Scripts
+{
+    <script src="~/js/create.js"></script>
+}
+
+<h4>@Localizer["Problem"]</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProblemID" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InputDescription" class="control-label"></label>
-                <input asp-for="InputDescription" class="form-control" />
-                <span asp-validation-for="InputDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OutputDescription" class="control-label"></label>
-                <input asp-for="OutputDescription" class="form-control" />
-                <span asp-validation-for="OutputDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+
+@using (Html.BeginForm("Edit", "Problem", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProblemID, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.ProblemID, new { @readonly = "readonly", @class = "form-control" })
     </div>
-</div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.InputDescription, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.InputDescription, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(m => m.InputDescription, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.OutputDescription, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.OutputDescription, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(m => m.OutputDescription, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Examples, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Examples, "", new { @class = "text-danger" })
+    </div>
+
+    <div id="examples">
+        @for (int i = 0; i < Model.Examples.Count; i++)
+        {
+            <partial name="ExampleCreator" for="Examples[i]" />
+        }
+    </div>
+
+    <div class="form-group">
+        <a href="/Problem/ExampleCreator" class="btn btn-success form-control" id="add-example">@Localizer["Add example"]</a>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tests, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.Tests, "", new { @class = "text-danger" })
+    </div>
+
+    <div id="tests">
+        @for (int i = 0; i < Model.Tests.Count; i++)
+        {
+            <partial name="TestCreator" for="Tests[i]" />
+        }
+    </div>
+
+    <div class="form-group">
+        <a href="/Problem/TestCreator" class="btn btn-success form-control" id="add-test">@Localizer["Add new test"]</a>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="@Localizer["Save"]" class="btn btn-primary" />
+    </div>
+}
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">@Localizer["Back to List"]</a>
 </div>
-

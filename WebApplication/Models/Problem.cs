@@ -6,6 +6,7 @@ namespace WebApplication.Models
 {
     public class Problem
     {
+        [Display (Name="ID")]
         public int ProblemID { get; set; }
 
         [Display (Name = "Name")]

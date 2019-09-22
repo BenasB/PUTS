@@ -27,6 +27,19 @@ namespace WebApplication.Controllers
             return View(p);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(p => p.ProblemID == id);
+
+            if (problem == null)
+                return NotFound();
+
+            return View(problem);
+        }
+
         public PartialViewResult TestCreator()
         {
             return PartialView("TestCreator", new Test());
@@ -39,13 +52,13 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Problem model)
+        public async Task<IActionResult> Create(Problem problem)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbContext.Problems.Add(model);
+                    dbContext.Problems.Add(problem);
                     await dbContext.SaveChangesAsync();
 
                     return RedirectToAction(nameof(List));
@@ -56,14 +69,40 @@ namespace WebApplication.Controllers
                 ModelState.AddModelError("", "Unable to create a problem");
             }
 
-            return View(model);
+            return View(problem);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProblem(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            Problem problemToEdit = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(p => p.ProblemID == id);
+
+            if (await TryUpdateModelAsync(problemToEdit))
+            {
+                try
+                {
+                    await dbContext.SaveChangesAsync();
+                    return RedirectToAction(nameof(List));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. ");
+                    return View(problemToEdit);
+                }               
+            }
+
+            return View(problemToEdit);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstAsync(m => m.ProblemID == id);
+            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(m => m.ProblemID == id);
             if (problem == null)
             {
                 return RedirectToAction(nameof(List));
