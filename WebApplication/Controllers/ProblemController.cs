@@ -29,12 +29,12 @@ namespace WebApplication.Controllers
 
         public PartialViewResult TestCreator()
         {
-            return PartialView("TestCreatorPartial", new Test());
+            return PartialView("TestCreator", new Test());
         }
 
         public PartialViewResult ExampleCreator()
         {
-            return PartialView("ExampleCreatorPartial", new Example());
+            return PartialView("ExampleCreator", new Example());
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            Problem problem = await dbContext.Problems.FindAsync(id);
+            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstAsync(m => m.ProblemID == id);
             if (problem == null)
             {
                 return RedirectToAction(nameof(List));

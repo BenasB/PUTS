@@ -6,7 +6,7 @@ namespace WebApplication.Models
 {
     public class Problem
     {
-        public int ID { get; set; }
+        public int ProblemID { get; set; }
 
         [Display (Name = "Name")]
         [Required (ErrorMessage = "Please specify the name")]

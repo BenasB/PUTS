@@ -117,25 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Are you sure that you want to delete this problem?" xml:space="preserve">
+    <value>Ar tikrai norite ištrinti šią užduotį?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Atšaukti</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Patvirtinkite</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Ištrinti</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Sąlyga</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Keisti</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Pavadinimas</value>
-  </data>
-  <data name="New problem" xml:space="preserve">
-    <value>Nauja užduotis</value>
-  </data>
-  <data name="Problems" xml:space="preserve">
-    <value>Uždaviniai</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Nustatymai</value>
   </data>
 </root>

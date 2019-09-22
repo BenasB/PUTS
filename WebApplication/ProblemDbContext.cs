@@ -8,5 +8,18 @@ namespace WebApplication
         public DbSet<Problem> Problems { get; set; }
 
         public ProblemDbContext(DbContextOptions<ProblemDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Problem>()
+                .HasMany(p => p.Tests)
+                .WithOne(t => t.Problem)
+                .IsRequired();
+
+            modelBuilder.Entity<Problem>()
+                .HasMany(p => p.Examples)
+                .WithOne(e => e.Problem)
+                .IsRequired();
+        }
     }
 }
