@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Expected Output" xml:space="preserve">
+    <value>Tikėtina išvestis</value>
+  </data>
+  <data name="Expected output must exist" xml:space="preserve">
+    <value>Tikėtina išvestis turi egzistuoti</value>
+  </data>
   <data name="Explanation" xml:space="preserve">
     <value>Paaiškinimas</value>
+  </data>
+  <data name="Given Input" xml:space="preserve">
+    <value>Pateikiama įvestis</value>
   </data>
 </root>
