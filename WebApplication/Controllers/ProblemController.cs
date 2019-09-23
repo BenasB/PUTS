@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Processing;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using WebApplication.Models;
 
@@ -27,6 +31,42 @@ namespace WebApplication.Controllers
             return View(p);
         }
 
+        public async Task<IActionResult> Result(string filePath, int id)
+        {
+            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(p => p.ProblemID == id);
+
+            if (problem == null)
+                return NotFound();
+
+            UserProgram userProgram = new UserProgram();
+
+            var result = userProgram.SetSource(filePath);
+
+            if (result.Status == UserProgram.Result.StatusType.Failed)
+                return View("Result", result.Status.ToString() + " " + result.Message);
+
+            result = userProgram.Compile();
+
+            if (result.Status == UserProgram.Result.StatusType.Failed)
+                return View("Result", result.Status.ToString() + " " + result.Message);
+
+            int passed = 0;
+            foreach (Test t in problem.Tests)
+            {
+                result = userProgram.Execute(t.GivenInput);
+
+                if (result.Status == UserProgram.Result.StatusType.Successful)
+                {
+                    result = userProgram.Evaluate(t.ExpectedOutput);
+
+                    if (result.Status == UserProgram.Result.StatusType.Successful)
+                        passed++;
+                }
+            }
+
+            return View("Result", result.Status.ToString() + " " + passed.ToString() + "/" + problem.Tests.Count);
+        }
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -38,6 +78,19 @@ namespace WebApplication.Controllers
                 return NotFound();
 
             return View(problem);
+        }
+
+        public async Task<IActionResult> Solve(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(p => p.ProblemID == id);
+
+            if (problem == null)
+                return NotFound();
+
+            return View("Solve", problem);
         }
 
         public PartialViewResult TestCreator()
@@ -118,6 +171,26 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction(nameof(List));
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upload(IFormFile file, int id)
+        {
+            // TODO: Automatically change extension to the uploaded file's (Don't HARDCODE)
+            var filePath = Path.ChangeExtension(Path.GetTempFileName(), ".cpp");
+
+            if (file?.Length > 0)
+            {
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return await Result(filePath, id);
+            }
+
+            return await Solve(id);
         }
     }
 }

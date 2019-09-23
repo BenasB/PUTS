@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Processing\Processing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Views\Problem\ExampleCreator.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

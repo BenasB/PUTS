@@ -1,0 +1,23 @@
+﻿@model WebApplication.Models.Example
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div class="example-case">
+    <div class="form-group ">
+        @Html.LabelFor(m => m.GivenInput, new { @class = "control-label" })
+        @Html.TextAreaFor(m => m.GivenInput, new { @class = "form-control", @readonly = "readonly"})
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(m => m.ExpectedOutput, new { @class = "control-label" })
+        @Html.TextAreaFor(m => m.ExpectedOutput, new { @class = "form-control", @readonly = "readonly"})
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Explanation))
+    {
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Explanation, new { @class = "control-label" })
+            @Html.TextAreaFor(m => m.Explanation, new { @class = "form-control", @readonly = "readonly"})
+        </div>
+    }
+</div>

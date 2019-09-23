@@ -1,0 +1,23 @@
+﻿#Title{
+    text-align: center;
+}
+
+textarea {
+    min-width: 100%;
+    max-width: 100%;
+    resize: none;
+    overflow: hidden;
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
+
+.example-case {
+    background-color: rgb(250,250,250);
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-color: lightgray;
+    border-width: 2px;
+    border-style: double;
+}

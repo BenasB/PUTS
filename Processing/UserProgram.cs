@@ -35,7 +35,7 @@ namespace Processing
                     return new Result { Status = Result.StatusType.Successful, Message = "Source file set" };
                 }              
                 else
-                    return new Result { Status = Result.StatusType.Failed, Message = "File extention not supported" };
+                    return new Result { Status = Result.StatusType.Failed, Message = "File extension not supported" };
             }
             else if (Directory.Exists(filePath))
             {
@@ -121,7 +121,7 @@ namespace Processing
         /// </summary>
         public Result Evaluate(string expected)
         {
-            if (programResult.Equals(expected))
+            if (programResult.Equals(expected.Trim()))
                 return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
             else
                 return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nActual: {programResult}" };

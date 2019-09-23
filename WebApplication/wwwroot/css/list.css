@@ -23,3 +23,11 @@ table .btn-group {
 .modal-footer form {
     display: inline;
 }
+
+.id {
+    text-align: center;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}

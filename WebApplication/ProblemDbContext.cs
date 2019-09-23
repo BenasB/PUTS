@@ -21,5 +21,7 @@ namespace WebApplication
                 .WithOne(e => e.Problem)
                 .IsRequired();
         }
+
+        public DbSet<WebApplication.Models.Example> Example { get; set; }
     }
 }
