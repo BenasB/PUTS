@@ -1,11 +1,4 @@
-﻿function setHeight(jq_in) {
-    jq_in.each(function (index, elem) {
-        elem.style.height = elem.scrollHeight + 'px';
-    });
-}
-setHeight($('textarea'));
-
-function bs_input_file() {
+﻿function bs_input_file() {
     $(".input-file").before(
         function () {
             if (!$(this).prev().hasClass('input-ghost')) {

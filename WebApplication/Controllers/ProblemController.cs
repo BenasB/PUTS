@@ -89,7 +89,7 @@ namespace WebApplication.Controllers
 
                 if (result.Status == UserProgram.Result.StatusType.Successful)
                 {
-                    result = userProgram.Evaluate(t.ExpectedOutput.Trim());
+                    result = userProgram.EvaluateAndGetResultIfFailed(t.ExpectedOutput.Trim());
 
                     if (result.Status == UserProgram.Result.StatusType.Successful)
                         passed++;
@@ -110,7 +110,7 @@ namespace WebApplication.Controllers
             }
             catch (UnauthorizedAccessException)
             {
-                Thread.Sleep(0);
+                Thread.Sleep(100);
                 Directory.Delete(parentFolderPath, true);
             }
             

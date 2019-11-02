@@ -15,6 +15,7 @@
 @section Scripts
 {
     <script src="~/js/solve.js"></script>
+    <script src="~/js/autoTextAreaHeight.js"></script>
 }
 
 <div>
@@ -46,15 +47,15 @@
     <hr />
 
     <h4>@Html.DisplayNameFor(m => m.Description)</h4>
-    <p>@Html.DisplayTextFor(m => m.Description)</p>
+    @Html.TextAreaFor(m => m.Description, new { @class="readonlyarea", @readonly = "readonly"})
     <hr />
 
     <h4>@Html.DisplayNameFor(m => m.InputDescription)</h4>
-    <p>@Html.DisplayTextFor(m => m.InputDescription)</p>
+    @Html.TextAreaFor(m => m.InputDescription, new { @class = "readonlyarea", @readonly = "readonly" })
     <hr />
 
     <h4>@Html.DisplayNameFor(m => m.OutputDescription)</h4>
-    <p>@Html.DisplayTextFor(m => m.OutputDescription)</p>
+    @Html.TextAreaFor(m => m.OutputDescription, new { @class = "readonlyarea", @readonly = "readonly" })
     <hr />
 
     <h4>@Html.DisplayNameFor(m => m.Examples)</h4>

@@ -21,3 +21,12 @@ textarea {
     border-width: 2px;
     border-style: double;
 }
+
+.readonlyarea
+{
+    border:none;
+}
+
+hr{
+    margin: 10px 0 10px 0;
+}

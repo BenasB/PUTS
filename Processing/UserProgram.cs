@@ -128,7 +128,18 @@ namespace Processing
             if (programResult.Equals(expected))
                 return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
             else
-                return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nActual: {programResult}" };
+                return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nReturned: {programResult}" };
+        }
+
+        /// <summary>
+        /// Evaluates the program result and returns the result of the program in the Message property if the evaluation is not true
+        /// </summary>
+        public Result EvaluateAndGetResultIfFailed(string expected)
+        {
+            if (programResult.Equals(expected))
+                return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
+            else
+                return new Result() { Status = Result.StatusType.Failed, Message = programResult};
         }
     }
 }

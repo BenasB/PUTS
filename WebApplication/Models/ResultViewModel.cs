@@ -1,4 +1,5 @@
 ﻿using Processing;
+using System;
 using System.Collections.Generic;
 
 namespace WebApplication.Models
@@ -14,6 +15,14 @@ namespace WebApplication.Models
         public List<TestResult> TestResults { get; set; } = new List<TestResult>();
 
         public int PassedTests { get; set; }
+
+        public int Percentage
+        {
+            get
+            {
+                return (int)MathF.Round(PassedTests / (float)TestResults.Count * 100f, MidpointRounding.AwayFromZero);
+            }
+        }
 
         public struct TestResult
         {

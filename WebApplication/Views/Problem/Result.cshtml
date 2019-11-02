@@ -1,4 +1,11 @@
-﻿@model WebApplication.Models.ResultViewModel
+﻿<environment include="Development">
+    <link rel="stylesheet" href="~/css/result.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</environment>
+
+@model WebApplication.Models.ResultViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Processing
 @inject IViewLocalizer Localizer
@@ -6,35 +13,96 @@
     ViewData["Title"] = Localizer["Result"];
 }
 
+@section Scripts
+{
+    <script src="~/js/autoTextAreaHeight.js"></script>
+}
+
 <h2 id="Title">@Model.ProblemID. @Model.Name</h2>
 <hr />
 
-@{
-    string compilationResult = @Localizer["Compilation result"].Value + ": " + @Localizer[Model.CompilationResult.Status.ToString()].Value;
-}
-<p>@compilationResult</p>
+<!-- Compilation -->
+<div id="inline-result">
+    <h4 id="result-name-big">@Localizer["Compilation"].Value</h4>
+
+    @if (Model.CompilationResult.Status == Processing.UserProgram.Result.StatusType.Failed)
+    {
+        <h4><span class="label label-danger">@Localizer[Model.CompilationResult.Status.ToString()].Value</span></h4>
+    }
+    else
+    {
+        <h4><span class="label label-success">@Localizer[Model.CompilationResult.Status.ToString()].Value</span></h4>
+    }
+</div>
 
 @if (Model.CompilationResult.Status == Processing.UserProgram.Result.StatusType.Failed)
 {
-    string errorMessage = @Localizer["Error message"].Value + ": " + Model.CompilationResult.Message;
-    <p>@errorMessage</p>
-}
+    <h4>@Localizer["Error message"]</h4>
+    <h5>@Model.CompilationResult.Message</h5>
 
-@if (Model.CompilationResult.Status == Processing.UserProgram.Result.StatusType.Successful)
+    <!-- Tests -->
+}
+else
 {
-    <h3>@Localizer["Tests"] @Model.PassedTests/@Model.TestResults.Count</h3>
+    <!-- Title and passed tests count -->
+    string passed = Model.PassedTests + "/" + Model.TestResults.Count;
+    <div id="inline-result">
+        <h4 id="result-name-big">@Localizer["Tests"]</h4>
+
+        @if (Model.PassedTests == 0)
+        {
+            <h4><span class="label label-danger">@passed</span></h4>
+            <h4><span class="label label-danger">@Model.Percentage%</span></h4>
+        }
+        else if (Model.PassedTests < Model.TestResults.Count)
+        {
+            <h4><span class="label label-warning">@passed</span></h4>
+            <h4><span class="label label-warning">@Model.Percentage%</span></h4>
+        }
+        else
+        {
+            <h4><span class="label label-success">@passed</span></h4>
+            <h4><span class="label label-success">@Model.Percentage%</span></h4>
+        }
+    </div>
+
     @for (int i = 0; i < Model.TestResults.Count; i++)
     {
         <hr />
-        string testName = @Localizer["Test"].Value + " " + (i + 1).ToString();
-        <p>@testName</p>
+        <div id="inline-result">
+            @{string testName = @Localizer["Test"].Value + " " + (i + 1).ToString();}
+            <h5 id="result-name">@testName</h5>
 
-        if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful)
-        {
-            <p>@Localizer[Model.TestResults[i].EvaluationResult.Status.ToString()]</p>
-        }else
+            @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful)
+            {
+                @if (Model.TestResults[i].EvaluationResult.Status == UserProgram.Result.StatusType.Successful)
+                {
+                    <span class="label label-success">@Localizer[Model.TestResults[i].EvaluationResult.Status.ToString()]</span>
+                }
+                else
+                {
+                    <span class="label label-danger">@Localizer[Model.TestResults[i].EvaluationResult.Status.ToString()]</span>
+                }
+            }
+            else
+            {
+                <span class="label label-danger">@Localizer[Model.TestResults[i].ExecutionResult.Status.ToString()]</span>
+            }
+        </div>
+
+        @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Failed)
         {
             <p>@Model.TestResults[i].ExecutionResult.Message</p>
+        }
+        @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful && Model.TestResults[i].EvaluationResult.Status == UserProgram.Result.StatusType.Failed)
+        {
+            <p>@Localizer["Output does not match"]</p>
+            FailedTest failedTest = new FailedTest
+            {
+                Expected = Model.TestResults[i].Test.ExpectedOutput,
+                Returned = Model.TestResults[i].EvaluationResult.Message
+            };
+            <partial name="FailedTest" for=@failedTest />
         }
     }
 }
