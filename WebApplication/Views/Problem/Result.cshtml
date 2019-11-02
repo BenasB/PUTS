@@ -14,7 +14,7 @@
 }
 
 @section Scripts
-{
+    {
     <script src="~/js/autoTextAreaHeight.js"></script>
 }
 
@@ -97,12 +97,16 @@ else
         @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful && Model.TestResults[i].EvaluationResult.Status == UserProgram.Result.StatusType.Failed)
         {
             <p>@Localizer["Output does not match"]</p>
-            FailedTest failedTest = new FailedTest
+
+            if (Model.ShowFailedTestCases)
             {
-                Expected = Model.TestResults[i].Test.ExpectedOutput,
-                Returned = Model.TestResults[i].EvaluationResult.Message
-            };
-            <partial name="FailedTest" for=@failedTest />
+                FailedTest failedTest = new FailedTest
+                {
+                    Expected = Model.TestResults[i].Test.ExpectedOutput,
+                    Returned = Model.TestResults[i].EvaluationResult.Message
+                };
+                <partial name="FailedTest" for=@failedTest />
+            }
         }
     }
 }

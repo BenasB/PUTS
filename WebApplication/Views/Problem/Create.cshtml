@@ -6,7 +6,7 @@
 </environment>
 
 @section Scripts
-{
+    {
     <script src="~/js/create.js"></script>
     <script src="~/js/testcreator.js"></script>
     <script src="~/js/examplecreator.js"></script>
@@ -46,6 +46,11 @@
         @Html.LabelFor(m => m.OutputDescription, new { @class = "control-label" })
         @Html.ValidationMessageFor(m => m.OutputDescription, "", new { @class = "text-danger" })
         @Html.TextAreaFor(m => m.OutputDescription, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ShowFailedTestCases, new { @class = "control-label" })
+        @Html.CheckBoxFor(m => m.ShowFailedTestCases)
     </div>
 
     <div class="form-group">

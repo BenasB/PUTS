@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebApplication.Helpers;
 
@@ -31,5 +32,13 @@ namespace WebApplication.Models
         [Display(Name = "Tests")]
         [MinimumCount(1, ErrorMessage = "At least 1 test must exist")]
         public List<Test> Tests { get; set; } = new List<Test>();
+
+        public int TimesSolved { get; set; } = 0;
+
+        [Display(Name = "Show failed test cases")]
+        public bool ShowFailedTestCases { get; set; } = true;
+
+        [Display(Name = "Added")]
+        public DateTime AddedDate { get; set; }
     }
 }

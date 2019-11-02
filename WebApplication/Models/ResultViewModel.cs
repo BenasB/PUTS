@@ -16,6 +16,8 @@ namespace WebApplication.Models
 
         public int PassedTests { get; set; }
 
+        public bool ShowFailedTestCases { get; set; }
+
         public int Percentage
         {
             get

@@ -28,8 +28,10 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th scope="col" class="col-sm-1 id">ID</th>
+            <th scope="col" class="col-sm-1 centered-text">ID</th>
             <th scope="col">@Localizer["Name"]</th>
+            <th scope="col" class="col-sm-1 centered-text">@Localizer["Solved"]</th>
+            <th scope="col" class="col-sm-1">@Localizer["Added"]</th>
             <th scope="col" class="col-sm-2 text-right">@Localizer["Settings"]</th>
         </tr>
     </thead>
@@ -38,8 +40,10 @@
             foreach (Problem p in Model)
             {
                 <tr>
-                    <td class="id">@p.ProblemID</td>
+                    <td class="centered-text">@p.ProblemID</td>
                     <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
+                    <td class="centered-text">@p.TimesSolved</td>
+                    <td>@p.AddedDate.ToShortDateString()</td>
                     <td>
                         <div class="btn-group">
                             <a asp-action="Edit" asp-route-id="@p.ProblemID" class="btn btn-warning">@Localizer["Edit"]</a>

@@ -57,8 +57,9 @@ namespace WebApplication.Controllers
             string parentFolderPath = Directory.GetParent(filePath).FullName;
             ResultViewModel viewModel = new ResultViewModel()
             {
-                ProblemID = id,
+                ProblemID = problem.ProblemID,
                 Name = problem.Name,
+                ShowFailedTestCases = problem.ShowFailedTestCases
             };
             UserProgram userProgram = new UserProgram();
 
@@ -108,12 +109,28 @@ namespace WebApplication.Controllers
             {
                 Directory.Delete(parentFolderPath, true);
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException) // Sometimes the process isn't killed fast enough
             {
                 Thread.Sleep(100);
                 Directory.Delete(parentFolderPath, true);
             }
             
+            if(passed == problem.Tests.Count)
+            {
+                problem.TimesSolved++;
+
+                if (await TryUpdateModelAsync(problem))
+                {
+                    try
+                    {
+                        await dbContext.SaveChangesAsync();
+                    }
+                    catch (DbUpdateException)
+                    {
+                        return View(viewModel);
+                    }
+                }
+            }
 
             return View(viewModel);
         }
@@ -172,6 +189,7 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    problem.AddedDate = DateTime.Now;
                     dbContext.Problems.Add(problem);
                     await dbContext.SaveChangesAsync();
 
