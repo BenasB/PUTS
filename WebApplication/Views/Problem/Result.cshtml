@@ -1,3 +1,40 @@
-﻿@model string
+﻿@model WebApplication.Models.ResultViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Processing
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Result"];
+}
 
-<h3>@Model</h3>
+<h2 id="Title">@Model.ProblemID. @Model.Name</h2>
+<hr />
+
+@{
+    string compilationResult = @Localizer["Compilation result"].Value + ": " + @Localizer[Model.CompilationResult.Status.ToString()].Value;
+}
+<p>@compilationResult</p>
+
+@if (Model.CompilationResult.Status == Processing.UserProgram.Result.StatusType.Failed)
+{
+    string errorMessage = @Localizer["Error message"].Value + ": " + Model.CompilationResult.Message;
+    <p>@errorMessage</p>
+}
+
+@if (Model.CompilationResult.Status == Processing.UserProgram.Result.StatusType.Successful)
+{
+    <h3>@Localizer["Tests"] @Model.PassedTests/@Model.TestResults.Count</h3>
+    @for (int i = 0; i < Model.TestResults.Count; i++)
+    {
+        <hr />
+        string testName = @Localizer["Test"].Value + " " + (i + 1).ToString();
+        <p>@testName</p>
+
+        if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful)
+        {
+            <p>@Localizer[Model.TestResults[i].EvaluationResult.Status.ToString()]</p>
+        }else
+        {
+            <p>@Model.TestResults[i].ExecutionResult.Message</p>
+        }
+    }
+}

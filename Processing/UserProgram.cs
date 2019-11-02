@@ -70,7 +70,9 @@ namespace Processing
                     if (compiler.ExitCode != 0)
                         return new Result() { Status = Result.StatusType.Failed, Message = $"Compiler error occured\n{compiler.StandardError.ReadToEnd()}" };
                     else
+                    {
                         return new Result() { Status = Result.StatusType.Successful, Message = "Compiled successfully" };
+                    }
                 }
             }
             catch (Exception e)
@@ -92,9 +94,9 @@ namespace Processing
                 RedirectStandardError = true
             };
 
-            try
+            using (Process program = new Process())
             {
-                using (Process program = new Process())
+                try
                 {
                     program.StartInfo = programStartInfo;
                     program.Start();
@@ -103,16 +105,18 @@ namespace Processing
 
                     if (!program.WaitForExit(timeoutInterval))
                     {
+                        program.Kill();
                         return new Result() { Status = Result.StatusType.Failed, Message = $"Program timed out ({timeoutInterval} ms)" };
                     }
 
                     programResult = program.StandardOutput.ReadToEnd().TrimEnd();
-                    return new Result() { Status = Result.StatusType.Successful, Message = "Program executed successfully"  };
+                    return new Result() { Status = Result.StatusType.Successful, Message = "Program executed successfully" };
                 }
-            }
-            catch (Exception e)
-            {
-                return new Result() { Status = Result.StatusType.Failed, Message = $"Program process error\n{e.Message}" };
+                catch (Exception e)
+                {
+                    program.Kill();
+                    return new Result() { Status = Result.StatusType.Failed, Message = $"Program process error\n{e.Message}" };
+                }           
             }
         }
 
@@ -121,7 +125,7 @@ namespace Processing
         /// </summary>
         public Result Evaluate(string expected)
         {
-            if (programResult.Equals(expected.Trim()))
+            if (programResult.Equals(expected))
                 return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
             else
                 return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nActual: {programResult}" };

@@ -6,6 +6,7 @@ namespace WebApplication
     public class ProblemDbContext : DbContext
     {
         public DbSet<Problem> Problems { get; set; }
+        public DbSet<Example> Example { get; set; }
 
         public ProblemDbContext(DbContextOptions<ProblemDbContext> options) : base(options) { }
 
@@ -20,8 +21,6 @@ namespace WebApplication
                 .HasMany(p => p.Examples)
                 .WithOne(e => e.Problem)
                 .IsRequired();
-        }
-
-        public DbSet<WebApplication.Models.Example> Example { get; set; }
+        }       
     }
 }

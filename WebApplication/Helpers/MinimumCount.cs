@@ -47,6 +47,8 @@ namespace WebApplication.Helpers
         {
             if (attribute is MinimumCount)
                 return new MinimumCountAdapter(attribute as MinimumCount, stringLocalizer);
+            else if (attribute is SourceFileValidation)
+                return new SourceFileValidationAdapter(attribute as SourceFileValidation, stringLocalizer);
             else
                 return _baseProvider.GetAttributeAdapter(attribute, stringLocalizer);
         }

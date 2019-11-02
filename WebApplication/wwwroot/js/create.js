@@ -6,7 +6,7 @@
             $('#tests').append(html);
         }
     });
-return false;
+    return false;
 });
 
 $('#add-example').click(function () {
