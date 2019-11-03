@@ -39,10 +39,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-log-in"></span> @Localizer["Sign In"]</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-user"></span> @Localizer["Sign Up"]</a></li>
-                </ul>
+                <partial name="_LoginPartial" />
 
                 @{
                     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
