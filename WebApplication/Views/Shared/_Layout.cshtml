@@ -44,7 +44,14 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-user"></span> @Localizer["Sign Up"]</a></li>
                 </ul>
 
-                @{var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}"; }
+                @{
+                    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+
+                    if (!string.IsNullOrEmpty(Context.Request.QueryString.Value))
+                    {
+                        returnUrl += Context.Request.QueryString.Value;
+                    }
+                }
                 <form class="navbar-form navbar-right" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
                     <div class="btn-group" role="group">
                         <button class="btn btn-link" type="submit" name="culture" value="lt-LT">LT</button>

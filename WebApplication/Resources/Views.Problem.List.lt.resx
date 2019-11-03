@@ -132,8 +132,17 @@
   <data name="New problem" xml:space="preserve">
     <value>Nauja užduotis</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Kitas</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Ankstesnis</value>
+  </data>
   <data name="Problems" xml:space="preserve">
     <value>Uždaviniai</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ieškoti</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Nustatymai</value>

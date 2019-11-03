@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Processing;
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApplication.Models;
@@ -16,16 +16,78 @@ namespace WebApplication.Controllers
         ProblemDbContext dbContext;
         readonly IHostingEnvironment hostingEnvironment; 
 
+        const int pageSize = 20;
+
         public ProblemController(ProblemDbContext problemDbContext, IHostingEnvironment hostingEnv)
         {
             dbContext = problemDbContext;
             hostingEnvironment = hostingEnv;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string sortString, string currentSearchString, string searchString, int? pageNumber)
         {
-            List<Problem> problemList = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).ToListAsync();
-            return View(problemList);
+            ViewData["CurrentSort"] = sortString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentSearchString;
+            }
+
+            ViewData["CurrentSearchString"] = searchString;
+            var problemList = from m in dbContext.Problems select m;
+            problemList = problemList.OrderByDescending(m => m.ProblemID); // Order by ID descending (default)
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // Search name and ID
+                problemList = problemList.Where(m => (
+                m.ProblemID.ToString().IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0 
+                || m.Name.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0));
+            }
+
+            if (!string.IsNullOrEmpty(sortString))
+            {
+                HandleSortString(sortString);
+
+                switch (sortString)
+                {
+                    case ("IDAscending"):
+                        problemList = problemList.OrderBy(m => m.ProblemID);
+                        break;
+                    case ("IDDescending"):
+                        problemList = problemList.OrderByDescending(m => m.ProblemID);
+                        break;
+                    case ("NameAscending"):
+                        problemList = problemList.OrderBy(m => m.Name);
+                        break;
+                    case ("NameDescending"):
+                        problemList = problemList.OrderByDescending(m => m.Name);
+                        break;
+                    case ("SolvedAscending"):
+                        problemList = problemList.OrderBy(m => m.TimesSolved);
+                        break;
+                    case ("SolvedDescending"):
+                        problemList = problemList.OrderByDescending(m => m.TimesSolved);
+                        break;
+                    case ("DateAscending"):
+                        problemList = problemList.OrderBy(m => m.AddedDate);
+                        break;
+                    case ("DateDescending"):
+                        problemList = problemList.OrderByDescending(m => m.AddedDate);
+                        break;
+                    default:
+                        break;
+                }
+            }else
+            {
+                RestoreSortOptions();
+            }
+
+            return View(await PaginatedList<Problem>.CreateAsync(problemList.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Create()
@@ -279,6 +341,61 @@ namespace WebApplication.Controllers
             }
 
             return await Solve(solutionViewModel.ProblemID);
+        }
+
+        void RestoreSortOptions()
+        {
+            ViewData["IDSort"] = "IDAscending";
+            ViewData["NameSort"] = "NameAscending";
+            ViewData["SolvedSort"] = "SolvedAscending";
+            ViewData["DateSort"] = "DateAscending";
+        }
+
+        void HandleSortString(string sortString)
+        {
+            if (sortString == "IDAscending")
+            {
+                RestoreSortOptions();
+                ViewData["IDSort"] = "IDDescending";
+            }
+            else if (sortString == "IDDescending")
+            {
+                RestoreSortOptions();
+                ViewData["IDSort"] = "IDAscending";
+            }
+
+            if (sortString == "NameAscending")
+            {
+                RestoreSortOptions();
+                ViewData["NameSort"] = "NameDescending";
+            }
+            else if (sortString == "NameDescending")
+            {
+                RestoreSortOptions();
+                ViewData["NameSort"] = "NameAscending";
+            }
+
+            if (sortString == "SolvedAscending")
+            {
+                RestoreSortOptions();
+                ViewData["SolvedSort"] = "SolvedDescending";
+            }
+            else if (sortString == "SolvedDescending")
+            {
+                RestoreSortOptions();
+                ViewData["SolvedSort"] = "SolvedAscending";
+            }
+
+            if (sortString == "DateAscending")
+            {
+                RestoreSortOptions();
+                ViewData["DateSort"] = "DateDescending";
+            }
+            else if (sortString == "DateDescending")
+            {
+                RestoreSortOptions();
+                ViewData["DateSort"] = "DateAscending";
+            }
         }
     }
 }

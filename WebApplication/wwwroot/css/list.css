@@ -2,8 +2,9 @@
     display: inline;
 }
 
-.btn-success {
+#Title .btn-success, form {
     float: right;
+    margin-left: 5px;
 }
 
 table .btn-group {
@@ -30,4 +31,13 @@ table .btn-group {
 
 .table > tbody > tr > td {
     vertical-align: middle;
+}
+
+.table thead tr th a:hover, a:focus{
+    text-decoration: none !important;
+    color: dimgray;
+}
+
+.table thead tr th a{
+    color:initial;
 }
