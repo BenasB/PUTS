@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Problem\FailedTest.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -29,6 +32,21 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\LocalizedIdentityErrorMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LocalizedIdentityErrorMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\LocalizedIdentityErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizedIdentityErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

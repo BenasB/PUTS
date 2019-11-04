@@ -1,7 +1,9 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = Localizer["Profile"];
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -9,20 +11,20 @@
     <div class="col-md-6">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Username"></label>
+            <label>@Localizer["Username"]</label>
             <input asp-for="Username" class="form-control" readonly />
         </div>
         <div class="form-group">
             <div class="form-group">
-                <label asp-for="FirstName"></label>
+                <label>@Localizer["First name"]</label>
                 <input asp-for="FirstName" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <label asp-for="LastName"></label>
+                <label>@Localizer["Last name"]</label>
                 <input asp-for="LastName" class="form-control" readonly />
             </div>
             <div class="form-group">
-                <label asp-for="Group"></label>
+                <label>@Localizer["Group"]</label>
                 <input asp-for="Group" class="form-control" readonly />
             </div>
         </div>

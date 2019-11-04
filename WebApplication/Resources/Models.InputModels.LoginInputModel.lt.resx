@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontaktai</value>
+  <data name="Password is required" xml:space="preserve">
+    <value>Slaptažodis yra privalomas</value>
   </data>
-  <data name="Support" xml:space="preserve">
-    <value>Pagalba</value>
+  <data name="Username is required" xml:space="preserve">
+    <value>Prisijungimo vardas yra privalomas</value>
   </data>
 </root>

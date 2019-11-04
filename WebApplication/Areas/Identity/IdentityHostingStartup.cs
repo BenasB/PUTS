@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Areas.Identity.Data;
+using WebApplication.Helpers;
 
 [assembly: HostingStartup(typeof(WebApplication.Areas.Identity.IdentityHostingStartup))]
 namespace WebApplication.Areas.Identity
@@ -17,6 +18,7 @@ namespace WebApplication.Areas.Identity
                         context.Configuration.GetConnectionString("ProblemDatabase")));
 
                 services.AddDefaultIdentity<ApplicationUser>()
+                    .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
                     .AddEntityFrameworkStores<ProblemDbContext>();
             });
         }

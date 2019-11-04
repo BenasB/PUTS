@@ -1,8 +1,9 @@
 ﻿@page
 @model LoginModel
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Sign in";
+    ViewData["Title"] = Localizer["Sign In"];
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -13,25 +14,25 @@
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Input.UserName"></label>
-                    <input asp-for="Input.UserName" class="form-control" autocomplete="off"/>
+                    <label>@Localizer["Username"]</label>
+                    <input asp-for="Input.UserName" class="form-control" autocomplete="off" />
                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" autocomplete="off"/>
+                    <label>@Localizer["Password"]</label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="off" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
+                        <label>
                             <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            @Localizer["Remember me"]
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Sign in</button>
+                    <button type="submit" class="btn btn-default">@Localizer["Sign In"]</button>
                 </div>
             </form>
         </section>

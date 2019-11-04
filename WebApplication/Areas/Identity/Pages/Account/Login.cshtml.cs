@@ -1,32 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApplication.Areas.Identity.Data;
+using WebApplication.Models.InputModels;
 
 namespace WebApplication.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly IStringLocalizer<LoginModel> _localizer;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IStringLocalizer<LoginModel> localizer)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _localizer = localizer;
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public LoginInputModel Input { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -34,21 +36,6 @@ namespace WebApplication.Areas.Identity.Pages.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "Username")]
-            public string UserName { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
-        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -81,7 +68,7 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _localizer["Invalid login attempt. Please check your data and retry"].Value);
                     return Page();
                 }
             }

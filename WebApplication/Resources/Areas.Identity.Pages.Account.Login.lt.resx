@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontaktai</value>
+  <data name="Password" xml:space="preserve">
+    <value>Slaptažodis</value>
   </data>
-  <data name="Support" xml:space="preserve">
-    <value>Pagalba</value>
+  <data name="Remember me" xml:space="preserve">
+    <value>Prisiminti mane</value>
+  </data>
+  <data name="Sign In" xml:space="preserve">
+    <value>Prisijungti</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Prisijungimo vardas</value>
   </data>
 </root>

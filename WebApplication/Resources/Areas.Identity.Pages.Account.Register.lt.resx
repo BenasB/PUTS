@@ -117,10 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontaktai</value>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Patvirtinkite slaptažodį</value>
   </data>
-  <data name="Support" xml:space="preserve">
-    <value>Pagalba</value>
+  <data name="First name" xml:space="preserve">
+    <value>Vardas</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Grupė</value>
+  </data>
+  <data name="Last name" xml:space="preserve">
+    <value>Pavardė</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Slaptažodis</value>
+  </data>
+  <data name="Sign Up" xml:space="preserve">
+    <value>Registruotis</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Prisijungimo vardas</value>
   </data>
 </root>

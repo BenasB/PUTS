@@ -1,16 +1,18 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 using WebApplication.Areas.Identity.Data;
+using WebApplication.Models.InputModels;
 
 namespace WebApplication.Areas.Identity.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {
+        private readonly IStringLocalizer<DeletePersonalDataModel> _localizer;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
@@ -18,22 +20,17 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
         public DeletePersonalDataModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            IStringLocalizer<DeletePersonalDataModel> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _localizer = localizer;
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-        }
+        public DeletePersonalDataInputModel Input { get; set; }
 
         public bool RequirePassword { get; set; }
 
@@ -62,7 +59,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
             {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password))
                 {
-                    ModelState.AddModelError(string.Empty, "Password not correct.");
+                    ModelState.AddModelError(string.Empty, _localizer["Password not correct"]);
                     return Page();
                 }
             }

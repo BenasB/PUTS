@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using WebApplication.Areas.Identity.Data;
+using WebApplication.Models.InputModels;
+
 namespace WebApplication.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
+        private readonly IStringLocalizer<ChangePasswordModel> _localizer;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
@@ -19,37 +19,20 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
         public ChangePasswordModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<ChangePasswordModel> logger)
+            ILogger<ChangePasswordModel> logger,
+            IStringLocalizer<ChangePasswordModel> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _localizer = localizer;
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public ChangePasswordInputModel Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
-            public string OldPassword { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "New password")]
-            public string NewPassword { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-        }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -93,7 +76,7 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = _localizer["Your password has been changed"];
 
             return RedirectToPage();
         }
