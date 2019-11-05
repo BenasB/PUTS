@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Areas.Identity.Data;
-using WebApplication.Helpers;
 
 [assembly: HostingStartup(typeof(WebApplication.Areas.Identity.IdentityHostingStartup))]
 namespace WebApplication.Areas.Identity
@@ -17,8 +17,17 @@ namespace WebApplication.Areas.Identity
                     options.UseMySql(
                         context.Configuration.GetConnectionString("ProblemDatabase")));
 
-                services.AddDefaultIdentity<ApplicationUser>()
+                // Configure the identity using the old-style API, ASP.NET Corre 2. bug
+                // See https://github.com/aspnet/Identity/issues/1813
+                /*services.AddDefaultIdentity<ApplicationUser>()
+                    .AddRoles<IdentityRole>()
                     .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
+                    .AddEntityFrameworkStores<ProblemDbContext>();*/
+
+                services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddRoleManager<RoleManager<IdentityRole>>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ProblemDbContext>();
             });
         }

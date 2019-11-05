@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="First name" xml:space="preserve">
-    <value>Vardas</value>
+  <data name="Admin" xml:space="preserve">
+    <value>Administrator</value>
   </data>
-  <data name="Group" xml:space="preserve">
-    <value>Grupė</value>
+  <data name="Member" xml:space="preserve">
+    <value>Member</value>
   </data>
-  <data name="Last name" xml:space="preserve">
-    <value>Pavardė</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>Profilis</value>
-  </data>
-  <data name="Role" xml:space="preserve">
-    <value>Rolė</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Prisijungimo vardas</value>
+  <data name="SuperUser" xml:space="preserve">
+    <value>Super User</value>
   </data>
 </root>

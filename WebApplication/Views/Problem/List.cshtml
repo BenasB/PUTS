@@ -7,6 +7,10 @@
 
 @model PaginatedList<Problem>
 @using Microsoft.AspNetCore.Mvc.Localization
+@using WebApplication.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Localizer["Problems"];
@@ -20,7 +24,10 @@
 <div id="Title">
     <h1>@Localizer["Problems"]</h1>
 
-    <a class="btn btn-success" asp-action="Create">@Localizer["New problem"]</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-success" asp-action="Create">@Localizer["New problem"]</a>
+    }
 
     <form asp-controller="Problem" asp-action="List" method="get" class="form-inline">
         <input type="hidden" name="sortString" value="@ViewData["CurrentSort"]" />
@@ -48,45 +55,64 @@
         <tr>
             <!-- Column names -->
 
-            <th scope="col" class="col-sm-1 centered-text"><a asp-action="List" 
-                                                              asp-route-sortString="@ViewData["IDSort"]" 
-                                                              asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
-                                                              ID</a></th>
+            <th scope="col" class="col-sm-1 centered-text">
+                <a asp-action="List"
+                   asp-route-sortString="@ViewData["IDSort"]"
+                   asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
+                    ID
+                </a>
+            </th>
 
-            <th scope="col"><a asp-action="List" 
-                               asp-route-sortString="@ViewData["NameSort"]" 
-                               asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
-                               @Localizer["Name"]</a></th>
+            <th scope="col">
+                <a asp-action="List"
+                   asp-route-sortString="@ViewData["NameSort"]"
+                   asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
+                    @Localizer["Name"]
+                </a>
+            </th>
 
-            <th scope="col" class="col-sm-1 centered-text"><a asp-action="List" 
-                                                              asp-route-sortString="@ViewData["SolvedSort"]" 
-                                                              asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
-                                                              @Localizer["Solved"]</a></th>
-            
-            <th scope="col" class="col-sm-1"><a asp-action="List" 
-                                                asp-route-sortString="@ViewData["DateSort"]" 
-                                                asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
-                                                @Localizer["Added"]</a></th>
+            <th scope="col" class="col-sm-1 centered-text">
+                <a asp-action="List"
+                   asp-route-sortString="@ViewData["SolvedSort"]"
+                   asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
+                    @Localizer["Solved"]
+                </a>
+            </th>
 
-            <th scope="col" class="col-sm-2 text-right">@Localizer["Settings"]</th>
+            <th scope="col" class="col-sm-1 centered-text">
+                <a asp-action="List"
+                   asp-route-sortString="@ViewData["DateSort"]"
+                   asp-route-currentSearchString="@ViewData["CurrentSearchString"]">
+                    @Localizer["Added"]
+                </a>
+            </th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th scope="col" class="col-sm-2 text-right">@Localizer["Settings"]</th>
+            }
         </tr>
     </thead>
     <tbody>
         @{
             foreach (Problem p in Model)
             {
-                <tr>
-                    <td class="centered-text">@p.ProblemID</td>
-                    <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
-                    <td class="centered-text">@p.TimesSolved</td>
-                    <td>@p.AddedDate.ToShortDateString()</td>
+            <tr>
+                <td class="centered-text">@p.ProblemID</td>
+                <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
+                <td class="centered-text">@p.TimesSolved</td>
+                <td class="centered-text">@p.AddedDate.ToShortDateString()</td>
+
+                @if (User.IsInRole("Admin"))
+                {
                     <td>
                         <div class="btn-group">
                             <a asp-action="Edit" asp-route-id="@p.ProblemID" class="btn btn-warning">@Localizer["Edit"]</a>
                             <button data-id=@p.ProblemID type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletionModal">@Localizer["Delete"]</button>
                         </div>
                     </td>
-                </tr>
+                }
+            </tr>
             }
         }
     </tbody>

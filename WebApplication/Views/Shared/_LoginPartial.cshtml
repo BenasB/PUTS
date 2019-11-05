@@ -6,17 +6,17 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
-{
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home/Index" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="glyphicon glyphicon-user"></span> @Localizer["Profile"]</a>
-            </li>
-            <li>
+{  
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="glyphicon glyphicon-user"></span> @Localizer["Profile"]</a>
+        </li>
+        <li>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Home/Index" method="post" id="logoutForm" class="navbar-right">
                 <button type="submit" class="btn btn-link navbar-btn navbar-link"><span class="glyphicon glyphicon-log-out"></span> @Localizer["Sign Out"]</button>
-            </li>
-        </ul>
-    </form>
+            </form>
+        </li>
+    </ul>
 }
 else
 {

@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-
+@using Microsoft.AspNetCore.Identity
+@using WebApplication.Areas.Identity.Data
 @inject IViewLocalizer Localizer
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +38,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
-                    <li><a asp-area="" asp-controller="Problem" asp-action="List">@Localizer["Problems"]</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-area="" asp-controller="Problem" asp-action="List">@Localizer["Problems"]</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                 </ul>
 

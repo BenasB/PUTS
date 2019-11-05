@@ -41,3 +41,7 @@ table .btn-group {
 .table thead tr th a{
     color:initial;
 }
+
+.table tbody tr {
+    height: 55px;
+}

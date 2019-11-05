@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Processing;
@@ -90,6 +91,7 @@ namespace WebApplication.Controllers
             return View(await PaginatedList<Problem>.CreateAsync(problemList.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        [Authorize (Roles = "Admin")]
         public IActionResult Create()
         {
             Problem p = new Problem();
@@ -197,6 +199,7 @@ namespace WebApplication.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -245,6 +248,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Problem problem)
         {
             try
@@ -268,6 +272,7 @@ namespace WebApplication.Controllers
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditProblem(int? id)
         {
             if (id == null)
@@ -294,6 +299,7 @@ namespace WebApplication.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             Problem problem = await dbContext.Problems.Include(m => m.Tests).Include(m => m.Examples).FirstOrDefaultAsync(m => m.ProblemID == id);
