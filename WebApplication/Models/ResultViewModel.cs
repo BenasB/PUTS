@@ -32,5 +32,18 @@ namespace WebApplication.Models
             public UserProgram.Result ExecutionResult { get; set; }
             public UserProgram.Result EvaluationResult { get; set; }
         }
+
+        public ProgramResult GetProgramResult()
+        {
+            ProgramResult result = new ProgramResult()
+            {
+                ProblemID = ProblemID,
+                PassedTests = PassedTests,
+                TestCount = TestResults.Count,
+                PercentageResult = Percentage
+            };
+
+            return result;
+        }
     }
 }

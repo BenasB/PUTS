@@ -117,25 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Back to list" xml:space="preserve">
-    <value>Atgal į sąrašą</value>
+  <data name="Evaluation" xml:space="preserve">
+    <value>Įvertinimas</value>
   </data>
-  <data name="Best result" xml:space="preserve">
-    <value>Geriausias rezultatas</value>
-  </data>
-  <data name="Choose" xml:space="preserve">
-    <value>Rinktis</value>
-  </data>
-  <data name="Choose a file..." xml:space="preserve">
-    <value>Pasirinkite failą...</value>
-  </data>
-  <data name="Solution" xml:space="preserve">
-    <value>Sprendimas</value>
-  </data>
-  <data name="Solve" xml:space="preserve">
-    <value>Spręsti</value>
-  </data>
-  <data name="Upload" xml:space="preserve">
-    <value>Įkelti</value>
+  <data name="Group" xml:space="preserve">
+    <value>Grupė</value>
   </data>
 </root>

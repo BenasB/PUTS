@@ -129,4 +129,7 @@
   <data name="Programming Problems Testing System" xml:space="preserve">
     <value>Programavimo Uždavinių Tikrinimo Sistema</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Vartotojai</value>
+  </data>
 </root>

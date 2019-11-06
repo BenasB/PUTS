@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Processing;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WebApplication.Areas.Identity.Data;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -15,14 +17,22 @@ namespace WebApplication.Controllers
     public class ProblemController : Controller
     {
         ProblemDbContext dbContext;
-        readonly IHostingEnvironment hostingEnvironment; 
+        readonly IHostingEnvironment hostingEnvironment;
+        private readonly UserManager<ApplicationUser> userManager;
 
         const int pageSize = 20;
 
-        public ProblemController(ProblemDbContext problemDbContext, IHostingEnvironment hostingEnv)
+        public ProblemController(ProblemDbContext problemDbContext, IHostingEnvironment hostingEnv, UserManager<ApplicationUser> userMngr)
         {
             dbContext = problemDbContext;
             hostingEnvironment = hostingEnv;
+            userManager = userMngr;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Evaluation(int? pageNumber)
+        {
+            return View(await PaginatedList<ApplicationUser>.CreateAsync(userManager.Users, pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> List(string sortString, string currentSearchString, string searchString, int? pageNumber)
@@ -178,22 +188,69 @@ namespace WebApplication.Controllers
                 Thread.Sleep(100);
                 Directory.Delete(parentFolderPath, true);
             }
-            
-            if(passed == problem.Tests.Count)
-            {
-                problem.TimesSolved++;
 
-                if (await TryUpdateModelAsync(problem))
+            ApplicationUser partialUser = await userManager.GetUserAsync(User);
+            ApplicationUser currentUser = await userManager.Users
+                                                    .Include(u => u.ProblemResults)
+                                                        .ThenInclude(r => r.FirstResult)
+                                                    .Include(u => u.ProblemResults)
+                                                        .ThenInclude(r => r.BestResult)
+                                                    .FirstOrDefaultAsync(u => u == partialUser);
+            if (currentUser != null)
+            {
+                bool hasProblem = currentUser.ProblemResults.Exists(r => r.ProblemID == problem.ProblemID);
+                bool gotPerfectPercentage = false;
+                if (hasProblem)
                 {
-                    try
+                    ProblemResult problemResult = currentUser.ProblemResults.Where(r => r.ProblemID == problem.ProblemID).First();
+                    int bestPercentage = problemResult.BestResult.PercentageResult;
+                    gotPerfectPercentage = bestPercentage < 100;
+                }
+                // A unique user solved the problem
+                if (passed == problem.Tests.Count && (!hasProblem || (hasProblem && gotPerfectPercentage)))
+                {
+                    problem.TimesSolved++;
+
+                    if (await TryUpdateModelAsync(problem))
                     {
-                        await dbContext.SaveChangesAsync();
-                    }
-                    catch (DbUpdateException)
-                    {
-                        return View(viewModel);
+                        try
+                        {
+                            await dbContext.SaveChangesAsync();
+                        }
+                        catch (DbUpdateException)
+                        {
+                            return View(viewModel);
+                        }
                     }
                 }
+
+                ProgramResult programResult = viewModel.GetProgramResult();
+                if (currentUser.ProblemResults.Exists(r => r.ProblemID == problem.ProblemID))
+                {
+                    // Tried to solve the problem again
+                    ProblemResult problemResult = currentUser.ProblemResults.First(r => r.ProblemID == problem.ProblemID);
+                    if (programResult.PercentageResult > problemResult.BestResult.PercentageResult)
+                    {
+                        if (problemResult.BestResult != problemResult.FirstResult)
+                        {
+                            dbContext.Remove(problemResult.BestResult);
+                        }
+                        problemResult.BestResult = programResult;
+                    }
+                }
+                else
+                {
+                    // Solved this problem for the first time
+                    ProblemResult problemResult = new ProblemResult()
+                    {
+                        ProblemID = problem.ProblemID,
+                        FirstResult = programResult,
+                        BestResult = programResult
+                    };
+                    currentUser.ProblemResults.Add(problemResult);
+                }
+
+                await userManager.UpdateAsync(currentUser);
             }
 
             return View(viewModel);
@@ -357,6 +414,9 @@ namespace WebApplication.Controllers
             ViewData["DateSort"] = "DateAscending";
         }
 
+        /// <summary>
+        /// Used to dinamically change asp-for on thead labels
+        /// </summary>
         void HandleSortString(string sortString)
         {
             if (sortString == "IDAscending")

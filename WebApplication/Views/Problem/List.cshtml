@@ -9,6 +9,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using WebApplication.Areas.Identity.Data
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IViewLocalizer Localizer
@@ -71,6 +72,8 @@
                 </a>
             </th>
 
+            <th scope="col" class="col-sm-1 centered-text"></th>
+
             <th scope="col" class="col-sm-1 centered-text">
                 <a asp-action="List"
                    asp-route-sortString="@ViewData["SolvedSort"]"
@@ -97,22 +100,53 @@
         @{
             foreach (Problem p in Model)
             {
-            <tr>
-                <td class="centered-text">@p.ProblemID</td>
-                <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
-                <td class="centered-text">@p.TimesSolved</td>
-                <td class="centered-text">@p.AddedDate.ToShortDateString()</td>
+                <tr>
+                    <td class="centered-text">@p.ProblemID</td>
+                    <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <td>
-                        <div class="btn-group">
-                            <a asp-action="Edit" asp-route-id="@p.ProblemID" class="btn btn-warning">@Localizer["Edit"]</a>
-                            <button data-id=@p.ProblemID type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletionModal">@Localizer["Delete"]</button>
-                        </div>
+                    @{
+                        ApplicationUser partialUser = await UserManager.GetUserAsync(User);
+                        ApplicationUser currentUser = await UserManager.Users
+                                                                .Include(u => u.ProblemResults)
+                                                                    .ThenInclude(r => r.FirstResult)
+                                                                .Include(u => u.ProblemResults)
+                                                                    .ThenInclude(r => r.BestResult)
+                                                                .FirstOrDefaultAsync(u => u == partialUser);
+                        bool hasSolved = currentUser.ProblemResults.Exists(r => r.ProblemID == p.ProblemID);
+                    }
+
+                    <td class="centered-text">
+                        @if (hasSolved)
+                        {
+                            ProblemResult problemResult = currentUser.ProblemResults.First(r => r.ProblemID == p.ProblemID);
+                            @if (problemResult.BestResult.PercentageResult == 0)
+                            {
+                                <span class="label label-danger">@problemResult.BestResult.PercentageResult%</span>
+                            }
+                            else if (problemResult.BestResult.PercentageResult < 100)
+                            {
+                                <span class="label label-warning">@problemResult.BestResult.PercentageResult%</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">@problemResult.BestResult.PercentageResult%</span>
+                            }
+                        }
                     </td>
-                }
-            </tr>
+
+                    <td class="centered-text">@p.TimesSolved</td>
+                    <td class="centered-text">@p.AddedDate.ToShortDateString()</td>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@p.ProblemID" class="btn btn-warning">@Localizer["Edit"]</a>
+                                <button data-id=@p.ProblemID type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletionModal">@Localizer["Delete"]</button>
+                            </div>
+                        </td>
+                    }
+                </tr>
             }
         }
     </tbody>

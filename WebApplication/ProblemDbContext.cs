@@ -25,6 +25,6 @@ namespace WebApplication
                 .HasMany(p => p.Examples)
                 .WithOne(e => e.Problem)
                 .IsRequired();
-        }       
+        }
     }
 }

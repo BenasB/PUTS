@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using WebApplication.Models;
 
 namespace WebApplication.Areas.Identity.Data
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]
@@ -13,5 +14,8 @@ namespace WebApplication.Areas.Identity.Data
 
         [PersonalData]
         public string Group { get; set; }
+
+        [PersonalData]
+        public List<ProblemResult> ProblemResults { get; set; } = new List<ProblemResult>();
     }
 }
