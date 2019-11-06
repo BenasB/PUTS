@@ -129,6 +129,9 @@
   <data name="Choose a file..." xml:space="preserve">
     <value>Pasirinkite failą...</value>
   </data>
+  <data name="Evaluation" xml:space="preserve">
+    <value>Vertinimas</value>
+  </data>
   <data name="Solution" xml:space="preserve">
     <value>Sprendimas</value>
   </data>

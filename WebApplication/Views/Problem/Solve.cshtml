@@ -22,6 +22,12 @@
 }
 
 <div>
+    @{ApplicationUser partialUser = await UserManager.GetUserAsync(User);}
+    @if (await UserManager.IsInRoleAsync(partialUser, "Admin"))
+    {
+        <a asp-action="Evaluation" asp-route-id=@Model.ProblemID class="btn btn-warning">@Localizer["Evaluation"]</a>
+    }    
+
     <h2 id="Title">@Model.ProblemID. @Model.Name</h2>
     <hr />
 
@@ -48,7 +54,6 @@
         </form>
 
         @{
-            ApplicationUser partialUser = await UserManager.GetUserAsync(User);
             ApplicationUser currentUser = await UserManager.Users
                                                     .Include(u => u.ProblemResults)
                                                         .ThenInclude(r => r.FirstResult)
@@ -95,9 +100,8 @@
         {
             <partial name="Example" for="Examples[i]" />
         }
+        <hr />
     }
-    
-    <hr />
 </div>
 
 <div>

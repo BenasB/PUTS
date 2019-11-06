@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Processing;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -30,9 +31,63 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Evaluation(int? pageNumber)
+        public async Task<IActionResult> Evaluation(int id, string currentSearchString, string searchString, int? pageNumber)
         {
-            return View(await PaginatedList<ApplicationUser>.CreateAsync(userManager.Users, pageNumber ?? 1, pageSize));
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentSearchString;
+            }
+            ViewData["CurrentEvaluationSearchString"] = searchString;
+
+            Problem problem = await dbContext.Problems.FirstOrDefaultAsync(p => p.ProblemID == id);
+
+            if (problem == null)
+                return NotFound();
+
+            EvaluationViewModel viewModel = new EvaluationViewModel()
+            {
+                ProblemID = problem.ProblemID,
+                ProblemName = problem.Name
+            };
+
+            var allUsersWhoSolved = userManager.Users
+                                .Include(u => u.ProblemResults)
+                                    .ThenInclude(r => r.FirstResult)
+                                .Include(u => u.ProblemResults)
+                                    .ThenInclude(r => r.BestResult)
+                                .Where(u => u.ProblemResults.Exists(r => r.ProblemID == problem.ProblemID));
+
+            List<EvaluationViewModel.EvaluationRow> solvedDataList = new List<EvaluationViewModel.EvaluationRow>();
+            foreach (ApplicationUser user in allUsersWhoSolved)
+            {
+                if (await userManager.IsInRoleAsync(user, "Admin"))
+                    continue;
+
+                string fullName = user.FirstName + " " + user.LastName;
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    if (!(fullName.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0 
+                        || user.Group.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0))
+                    {
+                        continue;
+                    }
+                }             
+
+                solvedDataList.Add(new EvaluationViewModel.EvaluationRow()
+                {
+                    FullName = fullName,
+                    Group = user.Group,
+                    ProblemResult = user.ProblemResults.Where(r => r.ProblemID == problem.ProblemID).First()
+                });
+            }
+
+            viewModel.PaginatedList = PaginatedList<EvaluationViewModel.EvaluationRow>.Create(solvedDataList, pageNumber ?? 1, pageSize);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> List(string sortString, string currentSearchString, string searchString, int? pageNumber)

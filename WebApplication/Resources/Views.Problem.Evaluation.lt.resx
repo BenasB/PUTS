@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Best result" xml:space="preserve">
+    <value>Geriausias rezultatas</value>
+  </data>
   <data name="Evaluation" xml:space="preserve">
-    <value>Įvertinimas</value>
+    <value>Vertinimas</value>
+  </data>
+  <data name="First result" xml:space="preserve">
+    <value>Pirmas rezultatas</value>
+  </data>
+  <data name="Full name" xml:space="preserve">
+    <value>Vardas ir pavardė</value>
   </data>
   <data name="Group" xml:space="preserve">
     <value>Grupė</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Kitas</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Ankstesnis</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ieškoti</value>
   </data>
 </root>
