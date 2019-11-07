@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processing", "Processing\Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processing.UnitTests", "Processing.UnitTests\Processing.UnitTests.csproj", "{4E563D81-BB79-450C-8D15-82B0206F66A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{55D83895-3DBA-49B0-AD58-0DBE75CEFE5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "WebApplication\WebApplication.csproj", "{55D83895-3DBA-49B0-AD58-0DBE75CEFE5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

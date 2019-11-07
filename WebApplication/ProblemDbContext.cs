@@ -8,7 +8,7 @@ namespace WebApplication
     public class ProblemDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Problem> Problems { get; set; }
-        public DbSet<Example> Example { get; set; }
+        public DbSet<Example> Examples { get; set; }
 
         public ProblemDbContext(DbContextOptions<ProblemDbContext> options) : base(options) { }
 

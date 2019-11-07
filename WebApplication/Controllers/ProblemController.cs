@@ -422,6 +422,22 @@ namespace WebApplication.Controllers
 
             try
             {
+                var users = userManager.Users
+                                .Include(u => u.ProblemResults)
+                                    .ThenInclude(r => r.FirstResult)
+                                .Include(u => u.ProblemResults)
+                                    .ThenInclude(r => r.BestResult)
+                                .Where(u => u.ProblemResults.Exists(r => r.ProblemID == problem.ProblemID));
+
+                // Remove problem results
+                foreach (var user in users)
+                {
+                    ProblemResult problemResult = user.ProblemResults.Where(r => r.ProblemID == problem.ProblemID).First();
+                    dbContext.Remove(problemResult.BestResult);
+                    dbContext.Remove(problemResult.FirstResult);
+                    dbContext.Remove(problemResult);
+                }
+                
                 dbContext.Problems.Remove(problem);
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
