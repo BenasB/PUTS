@@ -68,6 +68,8 @@ namespace PUTSWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+            UpdateDatabase(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -104,6 +106,19 @@ namespace PUTSWeb
             });
 
             CreateRoles(serviceProvider).Wait();
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ProblemDbContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
 
         private async Task CreateRoles(IServiceProvider serviceProvider)

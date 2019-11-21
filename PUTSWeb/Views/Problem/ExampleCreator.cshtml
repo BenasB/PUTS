@@ -10,19 +10,19 @@
 
         <div class="form-group ">
             @Html.LabelFor(m => m.GivenInput, new { @class = "control-label" })
-            @Html.TextAreaFor(m => m.GivenInput, new { @class = "form-control" })
+            @Html.TextAreaFor(m => m.GivenInput, new { @class = "form-control", autocomplete = "off", spellcheck = "false" })
         </div>
 
         <div class="form-group ">
             @Html.LabelFor(m => m.ExpectedOutput, new { @class = "control-label" })
             @Html.ValidationMessageFor(m => m.ExpectedOutput, "", new { @class = "text-danger" })
-            @Html.TextAreaFor(m => m.ExpectedOutput, new { @class = "form-control" })
+            @Html.TextAreaFor(m => m.ExpectedOutput, new { @class = "form-control", autocomplete = "off", spellcheck = "false" })
         </div>
 
         <div class="form-group ">
             @Html.LabelFor(m => m.Explanation, new { @class = "control-label" })
             @Html.ValidationMessageFor(m => m.Explanation, "", new { @class = "text-danger" })
-            @Html.TextAreaFor(m => m.Explanation, new { @class = "form-control" })
+            @Html.TextAreaFor(m => m.Explanation, new { @class = "form-control", autocomplete = "off", spellcheck = "false" })
         </div>
     }
 </div>

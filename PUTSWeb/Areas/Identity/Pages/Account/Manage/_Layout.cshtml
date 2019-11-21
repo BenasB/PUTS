@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Identity
+@using PUTSWeb.Areas.Identity.Data
+@inject UserManager<ApplicationUser> UserManager
 @inject IViewLocalizer Localizer
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +17,11 @@
             <ul class="nav nav-pills nav-stacked">
                 <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">@Localizer["Profile"]</a></li>
                 <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">@Localizer["Password"]</a></li>
-                <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">@Localizer["Personal data"]</a></li>
+
+                @if (!await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "SuperUser"))
+                {
+                    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">@Localizer["Personal data"]</a></li>
+                }
             </ul>
         </div>
         <div class="col-md-9">
