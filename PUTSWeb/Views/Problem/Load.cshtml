@@ -1,9 +1,4 @@
-﻿<environment include="Development">
-    <link rel="stylesheet" href="~/css/load.css" />
-</environment>
-<environment exclude="Development">
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-</environment>
+﻿<link rel="stylesheet" href="~/css/load.css" />
 
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
@@ -11,7 +6,7 @@
     ViewData["Title"] = Localizer["Processing"];
 }
 @section Scripts{
-<script src="~/js/load.js"></script>
+    <script src="~/js/load.js"></script>
 }
 <h3>@Localizer["Please wait"]</h3>
 

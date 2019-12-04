@@ -15,6 +15,7 @@ using PUTSWeb.Models;
 
 namespace PUTSWeb.Controllers
 {
+    [Authorize]
     public class ProblemController : Controller
     {
         ProblemDbContext dbContext;

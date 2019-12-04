@@ -6,6 +6,7 @@ using PUTSWeb.Areas.Identity.Data;
 
 namespace PUTSWeb.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -16,7 +17,7 @@ namespace PUTSWeb.Controllers
         }
 
         [Authorize (Roles = "Admin")]
-        public async Task<IActionResult> MakeAdmin(string username, bool isAdmin)
+        public async Task<IActionResult> MakeAdmin(string username, bool makeAdmin)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -24,12 +25,12 @@ namespace PUTSWeb.Controllers
                 return NotFound($"Unable to load user.");
             }
 
-            if (isAdmin)
+            if (makeAdmin)
                 await _userManager.AddToRoleAsync(user, "Admin");
             else
                 await _userManager.RemoveFromRoleAsync(user, "Admin");
 
-            return Content("Admin granted");
+            return Content("Admin permissions to the user changed.");
         }
     }
 }
