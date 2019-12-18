@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace Processing
 {
@@ -20,7 +22,7 @@ namespace Processing
         const int timeoutInterval = 2000;
 
         string sourceFilePath;
-        string programResult;
+        List<string> programResult;
 
         /// <summary>
         /// Sets the path to the source file that will be compiled
@@ -109,7 +111,12 @@ namespace Processing
                         return new Result() { Status = Result.StatusType.Failed, Message = $"Program timed out ({timeoutInterval} ms)" };
                     }
 
-                    programResult = program.StandardOutput.ReadToEnd().TrimEnd();
+                    programResult = new List<string>();
+                    string line;
+                    while ((line = program.StandardOutput.ReadLine()) != null)
+                    {
+                        programResult.Add(line.TrimEnd());
+                    }
                     return new Result() { Status = Result.StatusType.Successful, Message = "Program executed successfully" };
                 }
                 catch (Exception e)
@@ -125,7 +132,18 @@ namespace Processing
         /// </summary>
         public Result Evaluate(string expected)
         {
-            if (programResult.Equals(expected))
+            if (String.Join(' ', programResult).Trim().Equals(expected))
+                return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
+            else
+                return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nReturned: {programResult}" };
+        }
+
+        /// <summary>
+        /// Evaluates the program result with the expected result
+        /// </summary>
+        public Result Evaluate(string[] expected)
+        {
+            if (programResult.SequenceEqual(expected))
                 return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
             else
                 return new Result() { Status = Result.StatusType.Failed, Message = $"Output doesn't match\nExpected: {expected}\nReturned: {programResult}" };
@@ -134,12 +152,12 @@ namespace Processing
         /// <summary>
         /// Evaluates the program result and returns the result of the program in the Message property if the evaluation is not true
         /// </summary>
-        public Result EvaluateAndGetResultIfFailed(string expected)
+        public Result EvaluateAndGetResultIfFailed(string[] expected)
         {
-            if (programResult.Equals(expected))
+            if (programResult.SequenceEqual(expected))
                 return new Result() { Status = Result.StatusType.Successful, Message = "Output matches" };
             else
-                return new Result() { Status = Result.StatusType.Failed, Message = programResult};
+                return new Result() { Status = Result.StatusType.Failed, Message = String.Join('\n', programResult)};
         }
     }
 }

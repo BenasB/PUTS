@@ -220,7 +220,14 @@ namespace PUTSWeb.Controllers
 
                 if (result.Status == UserProgram.Result.StatusType.Successful)
                 {
-                    result = userProgram.EvaluateAndGetResultIfFailed(t.ExpectedOutput.Trim('\u202c').Trim());
+                    // Format expected output lines
+                    string[] expectedOutputLines = t.ExpectedOutput.Split('\n');
+                    for (int i = 0; i < expectedOutputLines.Length; i++)
+                    {
+                        expectedOutputLines[i] = expectedOutputLines[i].Trim('\u202c').Trim();
+                    }
+
+                    result = userProgram.EvaluateAndGetResultIfFailed(expectedOutputLines);
 
                     if (result.Status == UserProgram.Result.StatusType.Successful)
                         passed++;
