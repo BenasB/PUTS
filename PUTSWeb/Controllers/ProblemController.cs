@@ -112,8 +112,9 @@ namespace PUTSWeb.Controllers
             {
                 // Search name and ID
                 problemList = problemList.Where(m => (
-                m.ProblemID.ToString().IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0 
-                || m.Name.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                m.ProblemID.ToString().IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || m.Name.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || (!string.IsNullOrWhiteSpace(m.Tags) && m.Tags.IndexOf(searchString, StringComparison.CurrentCultureIgnoreCase) >= 0)));
             }
 
             if (!string.IsNullOrEmpty(sortString))

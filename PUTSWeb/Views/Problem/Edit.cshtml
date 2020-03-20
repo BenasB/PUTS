@@ -32,6 +32,13 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.Tags, new { @class = "control-label" })
+        <p class="text-muted explanation">@Localizer["Separate each tag with a comma"].Value</p>
+        @Html.ValidationMessageFor(m => m.Tags, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(m => m.Tags, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.Description, new { @class = "control-label" })
         @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
         @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })

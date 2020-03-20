@@ -22,3 +22,8 @@ form h4{
 form .btn-danger{
     float: right;
 }
+
+.explanation
+{
+    display: inline;
+}

@@ -132,6 +132,9 @@
   <data name="New problem" xml:space="preserve">
     <value>Naujas uždavinys</value>
   </data>
+  <data name="Separate each tag with a comma" xml:space="preserve">
+    <value>Atskirkite kiekvieną žymę kableliu</value>
+  </data>
   <data name="Test" xml:space="preserve">
     <value>Testas</value>
   </data>

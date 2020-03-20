@@ -14,6 +14,9 @@ namespace PUTSWeb.Models
         [Required (ErrorMessage = "Please specify the name")]
         public string Name { get; set; }
 
+        [Display (Name = "Tags")]
+        public string Tags { get; set; }
+
         [Display (Name = "Description")]
         [Required (ErrorMessage = "Please create a description")]
         public string Description { get; set; }

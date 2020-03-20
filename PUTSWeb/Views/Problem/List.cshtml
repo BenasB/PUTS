@@ -97,7 +97,24 @@
             {
                 <tr>
                     <td class="centered-text">@p.ProblemID</td>
-                    <td><a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a></td>
+                    <td>
+                        <a asp-action="Solve" asp-route-id="@p.ProblemID">@p.Name</a>
+                        @if (!string.IsNullOrWhiteSpace(p.Tags))
+                        {
+                            foreach (string tag in p.Tags.Split(","))
+                            {
+                                if (!string.IsNullOrWhiteSpace(tag))
+                                {
+                                <a asp-action="List"
+                                   asp-route-currentSearchString="@tag.Trim()"
+                                    class="label label-default">
+                                   @tag.Trim()
+                                </a>
+                                }
+                            }
+                        }
+                    </td>
+                        
 
                     @{
                         ApplicationUser partialUser = await UserManager.GetUserAsync(User);

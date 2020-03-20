@@ -135,4 +135,7 @@
   <data name="Save" xml:space="preserve">
     <value>Išsaugoti</value>
   </data>
+  <data name="Separate each tag with a comma" xml:space="preserve">
+    <value>Atskirkite kiekvieną žymę kableliu</value>
+  </data>
 </root>

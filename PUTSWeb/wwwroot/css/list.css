@@ -45,3 +45,7 @@ table .btn-group {
 .table tbody tr {
     height: 55px;
 }
+
+a {
+    margin-right: 5px;
+}

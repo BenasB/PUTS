@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PUTSWeb.Areas.Identity.Data;
+using PUTSWeb.Helpers;
 
 [assembly: HostingStartup(typeof(PUTSWeb.Areas.Identity.IdentityHostingStartup))]
 namespace PUTSWeb.Areas.Identity
@@ -28,7 +29,8 @@ namespace PUTSWeb.Areas.Identity
                     .AddRoleManager<RoleManager<IdentityRole>>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders()
-                    .AddEntityFrameworkStores<ProblemDbContext>();
+                    .AddEntityFrameworkStores<ProblemDbContext>()
+                    .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
             });
         }
     }

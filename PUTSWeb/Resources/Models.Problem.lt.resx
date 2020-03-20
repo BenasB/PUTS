@@ -153,6 +153,9 @@
   <data name="Show failed test cases" xml:space="preserve">
     <value>Rodyti nepavykusius testus</value>
   </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Žymės</value>
+  </data>
   <data name="Tests" xml:space="preserve">
     <value>Testai</value>
   </data>
