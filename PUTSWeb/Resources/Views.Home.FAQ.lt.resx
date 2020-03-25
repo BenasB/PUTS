@@ -123,4 +123,10 @@
   <data name="Frequently asked questions" xml:space="preserve">
     <value>Dažnai užduodami klausimai</value>
   </data>
+  <data name="How to start using PUTS?" xml:space="preserve">
+    <value>Kaip pradėti naudoti PUTS?</value>
+  </data>
+  <data name="Sign up and head to the problem list by clicking on Problems tab in the navigation panel." xml:space="preserve">
+    <value>Užsiregistruokite ir eikite į užduočių sąrašą, kurį galima pasiekti paspaudus Užduotys navigacinėje panelėje.</value>
+  </data>
 </root>

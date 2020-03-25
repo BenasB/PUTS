@@ -55,7 +55,7 @@ namespace Processing
             ProcessStartInfo compilerStartInfo = new ProcessStartInfo()
             {
                 FileName = "g++",
-                Arguments = sourceFilePath + " -o " + Path.ChangeExtension(sourceFilePath, ".exe"),
+                Arguments = sourceFilePath + " -o " + Path.ChangeExtension(sourceFilePath, ".exe") + " -std=c++11",
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
                 RedirectStandardError = true
