@@ -70,7 +70,7 @@ namespace Processing
                     compiler.WaitForExit();
 
                     if (compiler.ExitCode != 0)
-                        return new Result() { Status = Result.StatusType.Failed, Message = $"Compiler error occured\n{compiler.StandardError.ReadToEnd()}" };
+                        return new Result() { Status = Result.StatusType.Failed, Message = $"Compiler error occured\n{compiler.StandardError.ReadToEnd().Replace(sourceFilePath, "solution.cpp")}" };
                     else
                     {
                         return new Result() { Status = Result.StatusType.Successful, Message = "Compiled successfully" };
@@ -79,7 +79,7 @@ namespace Processing
             }
             catch (Exception e)
             {
-                return new Result() { Status = Result.StatusType.Failed, Message = $"Compiler process error\n{e.Message}" };
+                return new Result() { Status = Result.StatusType.Failed, Message = $"Compiler process error\n{e.Message.Replace(sourceFilePath, "solution.cpp")}" };
             }
         }
 
