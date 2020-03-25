@@ -1,32 +1,66 @@
 ﻿<link rel="stylesheet" href="~/css/index.css" />
 
+@model List<Blog>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = @Localizer["Home Page"];
 }
 
+@section Scripts
+    {
+    <script src="~/js/autoTextAreaHeight.js"></script>
+}
+
 <div class="text-center"><img src="~/images/Logo.png" alt="Logo icon" /></div>
 <h1 class="text-center">@Localizer["Welcome to PUTS!"]</h1>
 
-<h2 class="text-center">@Localizer["Using PUTS is easy"]</h2>
+@if (User.IsInRole("Admin"))
+{
+    <div id="btnParent">
+        <a class="btn btn-success" asp-action="Create" asp-controller="Blog">@Localizer["Write a blog"]</a>
+    </div>
+}
 
-<div id="instruction">
-    <div class="text-center"><img src="~/images/Intro1.png" class="img-thumbnail" alt="Solve a problem" /></div>
-    <h3 class="text-center">1. @Localizer["Solve a problem"]</h3>
-</div>
+@if (Model == null || Model.Count == 0)
+{
+    <h2 class="text-center">@Localizer["Using PUTS is easy"]</h2>
 
-<div id="instruction">
-    <div class="text-center"><img src="~/images/Intro2.png" class="img-thumbnail" alt="Upload your solution" /></div>
-    <h3 class="text-center">2. @Localizer["Upload your solution"]</h3>
-</div>
+    <div id="instruction">
+        <div class="text-center"><img src="~/images/Intro1.png" class="img-thumbnail" alt="Solve a problem" /></div>
+        <h3 class="text-center">1. @Localizer["Solve a problem"]</h3>
+    </div>
 
-<div id="instruction">
-    <div class="text-center"><img src="~/images/Intro3.png" class="img-thumbnail" alt="Let PUTS test it for you" /></div>
-    <h3 class="text-center">3. @Localizer["Let PUTS test it for you"]</h3>
-</div>
+    <div id="instruction">
+        <div class="text-center"><img src="~/images/Intro2.png" class="img-thumbnail" alt="Upload your solution" /></div>
+        <h3 class="text-center">2. @Localizer["Upload your solution"]</h3>
+    </div>
 
-<div id="instruction">
-    <div class="text-center"><img src="~/images/Intro4.png" class="img-thumbnail" alt="Get the results" /></div>
-    <h3 class="text-center">4. @Localizer["Get the results"]</h3>
-</div>
+    <div id="instruction">
+        <div class="text-center"><img src="~/images/Intro3.png" class="img-thumbnail" alt="Let PUTS test it for you" /></div>
+        <h3 class="text-center">3. @Localizer["Let PUTS test it for you"]</h3>
+    </div>
+
+    <div id="instruction">
+        <div class="text-center"><img src="~/images/Intro4.png" class="img-thumbnail" alt="Get the results" /></div>
+        <h3 class="text-center">4. @Localizer["Get the results"]</h3>
+    </div>
+}
+else
+{
+    foreach (Blog blog in Model)
+    {
+        <hr />
+        @if (User.IsInRole("Admin"))
+        {
+            <form method="post" asp-controller="Blog" asp-action="Delete" role="form">
+                <div class="btn-group">
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Blog" asp-route-id="@blog.BlogID">@Localizer["Edit"]</a>
+                    <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+                    <input name="id" type="hidden" id="hiddenid" value=@blog.BlogID>
+                </div>
+            </form>
+        }
+        <partial name="../Blog/Blog.cshtml" for=@blog />
+    }
+}

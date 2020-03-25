@@ -117,58 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Do other users see my results?" xml:space="preserve">
-    <value>Ar kiti vartotojai mato mano rezultatus?</value>
+  <data name="Please specify the title" xml:space="preserve">
+    <value>Nurodykite pavadinimą</value>
   </data>
-  <data name="FAQ" xml:space="preserve">
-    <value>DUK</value>
+  <data name="Text" xml:space="preserve">
+    <value>Tekstas</value>
   </data>
-  <data name="Frequently asked questions" xml:space="preserve">
-    <value>Dažnai užduodami klausimai</value>
+  <data name="Text can't be empty" xml:space="preserve">
+    <value>Tekstas negali būti tuščias</value>
   </data>
-  <data name="How to start using PUTS?" xml:space="preserve">
-    <value>Kaip pradėti naudoti PUTS?</value>
-  </data>
-  <data name="I found a problem/mistake in the system. What should I do?" xml:space="preserve">
-    <value>Radau sistemos problemą/klaidą. Ką man daryti?</value>
-  </data>
-  <data name="I get 'program timed out' error message. What should I do?" xml:space="preserve">
-    <value>Gaunu „programa viršijo ribojimo laiką“ klaidos pranešimą. Ką daryti?</value>
-  </data>
-  <data name="Is C++11 supported?" xml:space="preserve">
-    <value>Ar palaikoma C++11?</value>
-  </data>
-  <data name="Make sure your program can be compiled on your machine. Check for missing semicolons, programming errors. The error message can help you." xml:space="preserve">
-    <value>Įsitikinkite, kad programa susikompiliuoja jūsų įrenginyje. Patikrinkite ar netrūksta kabliataškių, nėra programavimo klaidų. Angliškas klaidos pranešimas gali padėti.</value>
-  </data>
-  <data name="Only C/C++" xml:space="preserve">
-    <value>Tik C/C++</value>
-  </data>
-  <data name="Only standard input is used. You get data like you get input from the console window, for example using cin." xml:space="preserve">
-    <value>Tik standartinę įvestį. Pradinius duomenis gaunate taip pat, kaip gautumėte iš konsolės lango, pavyzdžiui naudojant cin.</value>
-  </data>
-  <data name="Only you and administrators can see your results." xml:space="preserve">
-    <value>Tik jūs ir administratoriai gali matyti jūsų rezultatus.</value>
-  </data>
-  <data name="Report it to bud.benas@gmail.com" xml:space="preserve">
-    <value>Praneškite apie tai e. paštu bud.benas@gmail.com</value>
-  </data>
-  <data name="Sign up and head to the problem list by clicking on 'Problems' tab in the navigation panel." xml:space="preserve">
-    <value>Užsiregistruokite ir eikite į užduočių sąrašą, kurį galima pasiekti paspaudus „Uždaviniai“ navigacinėje panelėje.</value>
-  </data>
-  <data name="This usually occurs when the program is stuck (for example waiting for an input when there is none) or takes too much time to run and needs optimisation." xml:space="preserve">
-    <value>Įprastai taip atsitinka, kai programa tampa užstrigusi (pavyzdžiui laukia įvesties, nors ji nepateikiama) arba veikia per ilgai ir reikalinga jos optimizacija.</value>
-  </data>
-  <data name="What programming languagues are supported?" xml:space="preserve">
-    <value>Kokios programavimo kalbos palaikomos?</value>
-  </data>
-  <data name="What to do if the compilation failed?" xml:space="preserve">
-    <value>Ka daryti, jei kompiliacija nesėkminga?</value>
-  </data>
-  <data name="What type of input do problems use?" xml:space="preserve">
-    <value>Kokia įvestį naudoja uždaviniai?</value>
-  </data>
-  <data name="Yes." xml:space="preserve">
-    <value>Taip.</value>
+  <data name="Title" xml:space="preserve">
+    <value>Pavadinimas</value>
   </data>
 </root>

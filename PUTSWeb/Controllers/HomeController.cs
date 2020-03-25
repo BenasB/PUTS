@@ -2,18 +2,28 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Diagnostics;
 using PUTSWeb.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace PUTSWeb.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        private readonly ProblemDbContext dbContext;
+
+        public HomeController(ProblemDbContext problemDbContext)
+        {
+            dbContext = problemDbContext;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            List<Blog> blogs = dbContext.Blogs.OrderByDescending(m => m.AddedDate).ToList();
+            return View(blogs);
         }
 
         public IActionResult FAQ()

@@ -9,6 +9,7 @@ namespace PUTSWeb
     {
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Example> Examples { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
 
         public ProblemDbContext(DbContextOptions<ProblemDbContext> options) : base(options) { }
 
