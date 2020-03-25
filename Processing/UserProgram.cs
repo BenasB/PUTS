@@ -108,7 +108,7 @@ namespace Processing
                     if (!program.WaitForExit(timeoutInterval))
                     {
                         program.Kill();
-                        return new Result() { Status = Result.StatusType.Failed, Message = $"Program timed out ({timeoutInterval} ms)" };
+                        return new Result() { Status = Result.StatusType.Failed, Message = $"Program timed out" };
                     }
 
                     programResult = new List<string>();

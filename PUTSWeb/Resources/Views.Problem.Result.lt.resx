@@ -129,6 +129,9 @@
   <data name="Output does not match" xml:space="preserve">
     <value>Išvestis nesutampa</value>
   </data>
+  <data name="Program timed out" xml:space="preserve">
+    <value>Programa viršijo leistiną laiką</value>
+  </data>
   <data name="Result" xml:space="preserve">
     <value>Rezultatas</value>
   </data>

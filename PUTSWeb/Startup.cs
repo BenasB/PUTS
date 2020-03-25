@@ -33,7 +33,7 @@ namespace PUTSWeb
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                //options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -43,8 +43,6 @@ namespace PUTSWeb
 
             services.AddMvc(config =>
             {
-                // using Microsoft.AspNetCore.Mvc.Authorization;
-                // using Microsoft.AspNetCore.Authorization;
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
                                  .Build();

@@ -87,7 +87,7 @@ else
 
         @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Failed)
         {
-            <p>@Model.TestResults[i].ExecutionResult.Message</p>
+            <p>@Localizer[Model.TestResults[i].ExecutionResult.Message]</p>
         }
         @if (Model.TestResults[i].ExecutionResult.Status == UserProgram.Result.StatusType.Successful && Model.TestResults[i].EvaluationResult.Status == UserProgram.Result.StatusType.Failed)
         {

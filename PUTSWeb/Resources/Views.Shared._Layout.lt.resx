@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontaktai</value>
+  <data name="FAQ" xml:space="preserve">
+    <value>DUK</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Namai</value>
@@ -128,8 +128,5 @@
   </data>
   <data name="Programming Problems Testing System" xml:space="preserve">
     <value>Programavimo Uždavinių Tikrinimo Sistema</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Vartotojai</value>
   </data>
 </root>

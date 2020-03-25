@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = @Localizer["FAQ"];
+}
+<h2>@Localizer["Frequently asked questions"]</h2>
+
+<p>Use this page to detail your site's privacy policy.</p>

@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
     var showBanner = !consentFeature?.CanTrack ?? false;
@@ -21,11 +22,11 @@
             </div>
             <div class="collapse navbar-collapse">
                 <p class="navbar-text">
-                    Use this space to summarize your privacy and cookie use policy.
+                    @Localizer["This site uses cookies and may collect information about its users"]
                 </p>
                 <div class="navbar-right">
-                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">Learn More</a>
-                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">Accept</button>
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">@Localizer["Learn More"]</a>
+                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">@Localizer["Accept"]</button>
                 </div>
             </div>
         </div>
