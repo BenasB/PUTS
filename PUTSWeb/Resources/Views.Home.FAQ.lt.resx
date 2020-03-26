@@ -135,6 +135,9 @@
   <data name="I get 'program timed out' error message. What should I do?" xml:space="preserve">
     <value>Gaunu „programa viršijo ribojimo laiką“ klaidos pranešimą. Ką daryti?</value>
   </data>
+  <data name="I have more questions. How should I contact you?" xml:space="preserve">
+    <value>Turiu daugiau klausimų. Kaip man susisiekti?</value>
+  </data>
   <data name="Is C++11 supported?" xml:space="preserve">
     <value>Ar palaikoma C++11?</value>
   </data>
@@ -170,5 +173,8 @@
   </data>
   <data name="Yes." xml:space="preserve">
     <value>Taip.</value>
+  </data>
+  <data name="You can send a message to bud.benas@gmail.com" xml:space="preserve">
+    <value>Jūs galite nusiųsti žinutę e. paštu bud.benas@gmail.com</value>
   </data>
 </root>

@@ -71,7 +71,7 @@ namespace PUTSWeb
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            UpdateDatabase(app);
+            //UpdateDatabase(app);
 
             if (env.IsDevelopment())
             {

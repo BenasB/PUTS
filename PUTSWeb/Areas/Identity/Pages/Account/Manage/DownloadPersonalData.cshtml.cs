@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using PUTSWeb.Areas.Identity.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using PUTSWeb.Areas.Identity.Data;
 
 namespace PUTSWeb.Areas.Identity.Pages.Account.Manage
 {
@@ -27,11 +28,18 @@ namespace PUTSWeb.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var partialUser = await _userManager.GetUserAsync(User);
+            if (partialUser == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            ApplicationUser currentUser = await _userManager.Users
+                                                    .Include(u => u.ProblemResults)
+                                                        .ThenInclude(r => r.FirstResult)
+                                                    .Include(u => u.ProblemResults)
+                                                        .ThenInclude(r => r.BestResult)
+                                                    .FirstOrDefaultAsync(u => u == partialUser);
 
             _logger.LogInformation("User with ID '{UserId}' asked for their personal data.", _userManager.GetUserId(User));
 
@@ -41,11 +49,11 @@ namespace PUTSWeb.Areas.Identity.Pages.Account.Manage
                             prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
             foreach (var p in personalDataProps)
             {
-                personalData.Add(p.Name, p.GetValue(user)?.ToString() ?? "null");
+                personalData.Add(p.Name, p.GetValue(currentUser)?.ToString() ?? "null");
             }
 
             Response.Headers.Add("Content-Disposition", "attachment; filename=PersonalData.json");
-            return new FileContentResult(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(personalData)), "text/json");
+            return new FileContentResult(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(personalData, Formatting.Indented)), "text/json");
         }
     }
 }

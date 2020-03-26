@@ -11,10 +11,23 @@
     .navbar-brand {
         font-size: 14px;
     }
+
+    .language {
+        float: left !important;
+        width:120%;
+    }
 }
 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 15px;
+}
+
+.navigation {
+    float: left!important;
+}
+
+.explanation {
+    display: inline;
 }

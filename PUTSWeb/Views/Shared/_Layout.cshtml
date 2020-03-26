@@ -55,8 +55,9 @@
                         returnUrl += Context.Request.QueryString.Value;
                     }
                 }
-                <form class="navbar-form navbar-right" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
-                    <div class="btn-group" role="group">
+
+                <form class="navbar-form navbar-right language" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
+                    <div class="btn-group navigation" role="group">
                         <button class="btn btn-link" type="submit" name="culture" value="lt-LT">LT</button>
                         <button class="btn btn-link" type="submit" name="culture" value="en-US">EN</button>
                     </div>

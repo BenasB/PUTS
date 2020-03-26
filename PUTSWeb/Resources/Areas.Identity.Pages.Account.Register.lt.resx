@@ -129,6 +129,9 @@
   <data name="Last name" xml:space="preserve">
     <value>Pavardė</value>
   </data>
+  <data name="Name of school and class" xml:space="preserve">
+    <value>Mokyklos pavadinimas ir klasė</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Slaptažodis</value>
   </data>

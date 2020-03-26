@@ -1,6 +1,4 @@
-﻿using PUTSWeb.Areas.Identity.Data;
-
-namespace PUTSWeb.Models
+﻿namespace PUTSWeb.Models
 {
     public class ProblemResult
     {
