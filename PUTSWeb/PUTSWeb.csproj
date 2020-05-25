@@ -4,11 +4,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>               
-    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>               
+    <UserSecretsId>e8d05e85-fdd6-42a8-9c5d-46acfedc5b5b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BeginCollectionItemCore" Version="1.0.8" />
+    <PackageReference Include="Markdig" Version="0.18.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />

@@ -1,9 +1,9 @@
 D:\Programming\C#\PUTS\Processing\bin\Debug\netcoreapp2.1\Processing.deps.json
 D:\Programming\C#\PUTS\Processing\bin\Debug\netcoreapp2.1\Processing.dll
 D:\Programming\C#\PUTS\Processing\bin\Debug\netcoreapp2.1\Processing.pdb
-D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.csprojAssemblyReference.cache
 D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.csproj.CoreCompileInputs.cache
 D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.AssemblyInfoInputs.cache
 D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.AssemblyInfo.cs
 D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.dll
 D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.pdb
+D:\Programming\C#\PUTS\Processing\obj\Debug\netcoreapp2.1\Processing.csprojAssemblyReference.cache

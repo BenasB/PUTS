@@ -1688,10 +1688,11 @@
   },
   "libraries": {
     "Microsoft.CodeCoverage/15.9.0": {
-      "sha512": "6bbBLRceg0s5XjyBygsv6PSVEE4rUjwzHHpPx37nyOCE4KGV+Qi3J6aQ1zmgcfy+8YpnaMQNfEn4E9mq8R+FLg==",
+      "sha512": "oherNadUtHKqFQbtdRKXgPvZVWyGkOeS83pFWT864587npS7JIFWIJ/LJV0c25cWNkCytn2S9XGSSkKscnNFAQ==",
       "type": "package",
       "path": "microsoft.codecoverage/15.9.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/netstandard1.0/CodeCoverage/CodeCoverage.config",
         "build/netstandard1.0/CodeCoverage/CodeCoverage.exe",
@@ -1808,10 +1809,11 @@
       ]
     },
     "Microsoft.NET.Test.Sdk/15.9.0": {
-      "sha512": "T20QjEGchVbKEWdaOTBCgJNac5dtyZ0ophzGKFYJHgpGlHYoiNspdLHgcfCSOEuMWHFCy7oROxzkTW+PxDIKuQ==",
+      "sha512": "sGDhl1lTcyC4nbMA6vta+nADm50IEGnm9SW9+JNaie1zjtSmUdOPHu02+WK2SJND+3vbr9DWvgfi9qlSPfUAyw==",
       "type": "package",
       "path": "microsoft.net.test.sdk/15.9.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/net45/Microsoft.Net.Test.Sdk.props",
         "build/net45/Microsoft.Net.Test.Sdk.targets",
@@ -1824,7 +1826,7 @@
       ]
     },
     "Microsoft.NETCore.App/2.1.0": {
-      "sha512": "AvT774nTFgU8cYcGO9j1EMwuayKslxqYTurg32HGpWa2hEYNuW2+XgYVVNcZe6Ndbr84QX6fwaOZfd5n+1m2OA==",
+      "sha512": "JNHhG+j5eIhG26+H721IDmwswGUznTwwSuJMFe/08h0X2YarHvA15sVAvUkA/2Sp3W0ENNm48t+J7KTPRqEpfA==",
       "type": "package",
       "path": "microsoft.netcore.app/2.1.0",
       "files": [
@@ -2090,7 +2092,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetAppHost/2.1.0": {
-      "sha512": "f/47I60Wg3SrveTvnecCQhCZCAMYlUujWF15EQ/AZTqF/54qeEJjbCIAxKcZI8ToUYzSg6JdfrHggsgjCyCE9Q==",
+      "sha512": "vMn8V3GOp/SPOG2oE8WxswzAWZ/GZmc8EPiB3vc2EZ6us14ehXhsvUFXndYopGNSjCa9OdqC6L6xStF1KyUZnw==",
       "type": "package",
       "path": "microsoft.netcore.dotnetapphost/2.1.0",
       "files": [
@@ -2104,7 +2106,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/2.1.0": {
-      "sha512": "p50yZYKzhH64lmArJgoKjtvsNehECa+/sAuOQzZh5uDNBTbRKxjN8IXP1e517xdVsgrFcSNxSEVDKZIOWVjGcQ==",
+      "sha512": "vBUwNihtLUVS2HhO6WocYfAktRmfFihm6JB8/sJ53caVW+AelvbnYpfiGzaZDpkWjN6vA3xzOKPu9Vu8Zz3p8Q==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/2.1.0",
       "files": [
@@ -2118,7 +2120,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/2.1.0": {
-      "sha512": "fS9D8a+y55n6mHMbNqgHXaPGkjmpVH9h97OyrBxsCuo3Z8aQaFMJ5xIfmzji2ntUd/3truhMbSgSfIelHOkQpg==",
+      "sha512": "o0PRql5qOHFEY3d1WvzE+T7cMFKtOsWLMg8L1oTeGNnI4u5AzOj8o6AdZT3y2GxFA1DAx7AQ9qZjpCO2/bgZRw==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/2.1.0",
       "files": [
@@ -2132,7 +2134,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.1.0": {
-      "sha512": "aSTPL94NloSiQVL5Len8wbjFKOnoAX/vOh3s3DF6g3c7GUUMLCDvnBhmA72M2iN2AedyA8hpr7m89kzSAKUnJQ==",
+      "sha512": "ok+RPAtESz/9MUXeIEz6Lv5XAGQsaNmEYXMsgVALj4D7kqC8gveKWXWXbufLySR2fWrwZf8smyN5RmHu0e4BHA==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.1.0",
       "files": [
@@ -2149,7 +2151,7 @@
       ]
     },
     "Microsoft.NETCore.Targets/2.1.0": {
-      "sha512": "etaYwrLZQUS+b3UWTpCnUggd6SQ/ZIkZ5pHnoR7+dIWt/wp2Rv3CvMKOZISsrt7FYCHKwCxfcepuuyEWkQxADg==",
+      "sha512": "x188gIZXOwFXkPXyGavEcPGcR6RGvjFOES2QzskN4gERZjWPN34qhRsZVMC0CLJfQLGSButarcgWxPPM4vmg0w==",
       "type": "package",
       "path": "microsoft.netcore.targets/2.1.0",
       "files": [
@@ -2166,10 +2168,11 @@
       ]
     },
     "Microsoft.TestPlatform.ObjectModel/15.9.0": {
-      "sha512": "tfMqieTIupYpV58vSqZQciul21ilXU2QmIak6Gjv1ptomBnE5GJ25R6GqsIQ6I7siodmu1gcu3SDmC20w9XmvA==",
+      "sha512": "O6J4QhackLTvuCuunhxUfXaySRIY6PjLrO6msAdeRjF46et2PYPtRdg9gV9MLRlb/khwBE2ahmOKILP7NWSDfg==",
       "type": "package",
       "path": "microsoft.testplatform.objectmodel/15.9.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net451/Microsoft.TestPlatform.CoreUtilities.dll",
         "lib/net451/Microsoft.TestPlatform.PlatformAbstractions.dll",
@@ -2237,10 +2240,11 @@
       ]
     },
     "Microsoft.TestPlatform.TestHost/15.9.0": {
-      "sha512": "i+gng0OlBNorfdrae9qimEHSaxpJAWz6OtuwhR+mQ4GNEKf9cRs6wBm5lT+1vjiFpwTH1M4jHrMtIypfVPIJ5A==",
+      "sha512": "ve8yMTxeK5p8iTn7fCXzrTGiAqlx21thussMEflAOmVEe56OPOi2grkxLEguw7tDOXBKZtRPI7CeH+nXOpEb/g==",
       "type": "package",
       "path": "microsoft.testplatform.testhost/15.9.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "build/uap10.0/Microsoft.TestPlatform.TestHost.props",
@@ -2801,10 +2805,12 @@
       ]
     },
     "System.Collections.Immutable/1.2.0": {
-      "sha512": "Cma8cBW6di16ZLibL8LYQ+cLjGzoKxpOTu/faZfDcx94ZjAGq6Nv5RO7+T1YZXqEXTZP9rt1wLVEONVpURtUqw==",
+      "sha512": "ACF5WhVfZ/EkfmVy9wpc3oJCK7koh1GlnXQ4WXW9N4ribzY8aKF6Vr56jD0rNTuUzFvRWDbHuYJ/Qnrtrd/7VA==",
       "type": "package",
       "path": "system.collections.immutable/1.2.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/System.Collections.Immutable.dll",
@@ -4248,10 +4254,12 @@
       ]
     },
     "System.Reflection.Metadata/1.3.0": {
-      "sha512": "jMSCxA4LSyKBGRDm/WtfkO03FkcgRzHxwvQRib1bm2GZ8ifKM1MX1al6breGCEQK280mdl9uQS7JNPXRYk90jw==",
+      "sha512": "piuaOy0ZH1/nNHMdwFrHP27ToY7SVblMqc+u8oEVf434IcpMmWpuU9aXWhAleRYjnKmfB3VIvGswEwiwptueXg==",
       "type": "package",
       "path": "system.reflection.metadata/1.3.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.1/System.Reflection.Metadata.dll",
@@ -5281,10 +5289,12 @@
       ]
     },
     "System.Threading.Thread/4.0.0": {
-      "sha512": "gIdJqDXlOr5W9zeqFErLw3dsOsiShSCYtF9SEHitACycmvNvY8odf9kiKvp6V7aibc8C4HzzNBkWXjyfn7plbQ==",
+      "sha512": "nuUpkup2FbB4Xf62nwWARtm1wQ457fEyR9KvLsCzBSj1yQTtKuqmlSgw/e6aiwB3CiUEAUbZ1IgEvza/m2SYxA==",
       "type": "package",
       "path": "system.threading.thread/4.0.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5603,10 +5613,12 @@
       ]
     },
     "System.Xml.XPath/4.0.1": {
-      "sha512": "UWd1H+1IJ9Wlq5nognZ/XJdyj8qPE4XufBUkAW59ijsCPjZkZe0MUzKKJFBr+ZWBe5Wq1u1d5f2CYgE93uH7DA==",
+      "sha512": "rxtBUK/w9uIL9Kc4idmz4SsoLYfsa+iGgct4qJWOraqtvJB92tCFaFD6Tu4WXnaxduQuqGau771uMjv61vJtZA==",
       "type": "package",
       "path": "system.xml.xpath/4.0.1",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5675,20 +5687,22 @@
       ]
     },
     "xunit/2.4.0": {
-      "sha512": "qR8BQB8EVkKI+fPpVvLLDdc5Ef/GfHUrsQFYXeOaCNqA1ijhZJCXllFVuZfIf0R/WpZ1UJtoNhjrHB8xC8fPJg==",
+      "sha512": "NL00nGsDsyWc1CWxz5FXXjLpW9oFG18WJoTPCyhNv4KGP/e5iLJqAqgM1uaJZyQ6WaTtmWIy4yjYP3RdcaT7Vw==",
       "type": "package",
       "path": "xunit/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "xunit.2.4.0.nupkg.sha512",
         "xunit.nuspec"
       ]
     },
     "xunit.abstractions/2.0.2": {
-      "sha512": "lX06DG0EjzC6U+QVVCThaDjGBHMk9qYomnEotK7oxjgvW3jxFW4gEWSvRe2/GlyBjI0ICGB21VgmvS5L5MM6Wg==",
+      "sha512": "vItLB0WkaKg0426RgWq+ZdXH6D+YV/uH28C0weWMOBnVx7I+luHuEYss9hoOngpkiN5kUpLvh9VZRx1H2sk59A==",
       "type": "package",
       "path": "xunit.abstractions/2.0.2",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net35/xunit.abstractions.dll",
         "lib/net35/xunit.abstractions.xml",
@@ -5701,10 +5715,12 @@
       ]
     },
     "xunit.analyzers/0.10.0": {
-      "sha512": "Uw6EqkOmt0IystUtzkU4U8ixCEz+piqgczyoPT00RwPDsWHtWwzedjsBQTS6P1h2+uwDF6w5UpYt5/SSE7eexQ==",
+      "sha512": "4/IDFCJfIeg6bix9apmUtIMwvOsiwqdEexeO/R2D4GReIGPLIRODTpId/l4LRSrAJk9lEO3Zx1H0Zx6uohJDNg==",
       "type": "package",
       "path": "xunit.analyzers/0.10.0",
+      "hasTools": true,
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "analyzers/dotnet/cs/xunit.analyzers.dll",
         "tools/install.ps1",
@@ -5714,10 +5730,11 @@
       ]
     },
     "xunit.assert/2.4.0": {
-      "sha512": "3QEiXEVHxLh+NRvhPijcYx+7onfOhiq8rKVldhDtVJ9a/rLAbwnR0DURn8g4MiBwgejuqta+APa61EZdGC+L8Q==",
+      "sha512": "Swvkm6iTjZr8TiUj5vMnmfG+2dD4s/BIBgsVOzTxxmoq2ndGsmM2WIL4wuqJ8RhxydWIDOPpIaaytjT2pMTEdg==",
       "type": "package",
       "path": "xunit.assert/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard1.1/xunit.assert.dll",
         "lib/netstandard1.1/xunit.assert.xml",
@@ -5728,10 +5745,11 @@
       ]
     },
     "xunit.core/2.4.0": {
-      "sha512": "pp0f1fpVqoA+eyLWPR3bQsj8l7cbFZXETqNa1aBGWO3ewV3l89WvredQuEgOsNI9ffw7TB24oU/iGKwBVr7xWg==",
+      "sha512": "BJ/O/tPEcHUCwQYuwqXoYccTMyw6B5dA6yh7WxWWBhKbjqTsG9RWL0nCQXM5yQYJwUuFzBkiXDPN1BO6UdBB4Q==",
       "type": "package",
       "path": "xunit.core/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/xunit.core.props",
         "build/xunit.core.targets",
@@ -5742,10 +5760,11 @@
       ]
     },
     "xunit.extensibility.core/2.4.0": {
-      "sha512": "TTxWCTKosHhfvH195H6NhIv40mXZpaiBU5BIIjeMHDeKT3drzgC436HH4TFHKM9hNVGMnYG4f+jUjEtgIL0D7w==",
+      "sha512": "qr/KrR6uukHXD9e/lLQjyCPfMEDuvvhNFDzsYzCF2kKlYKiqcADfUvA9Q68rBtKFtwHFeghjWEuv15KoGD2SfA==",
       "type": "package",
       "path": "xunit.extensibility.core/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net452/xunit.core.dll",
         "lib/net452/xunit.core.dll.tdnet",
@@ -5761,10 +5780,11 @@
       ]
     },
     "xunit.extensibility.execution/2.4.0": {
-      "sha512": "rchl0pAgHx291bvmeO2ID53TnaQq06kNsJ3alaBEinvzzyOtkvmoxGPs1AgELjg9SRTTlOuhAHdJTTJe0N2zYQ==",
+      "sha512": "252Dzn7i5bMPKtAL15aOP3qJhxKd+57I8ldwIQRJa745JxQuiBu5Da0vtIISVTtc3buRSkBwVnD9iUzsEmCzZA==",
       "type": "package",
       "path": "xunit.extensibility.execution/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "lib/net452/xunit.execution.desktop.dll",
         "lib/net452/xunit.execution.desktop.xml",
@@ -5777,10 +5797,11 @@
       ]
     },
     "xunit.runner.visualstudio/2.4.0": {
-      "sha512": "0k66QGvVZD03GA5/GVhcINzAu/JPNFYzzy9Dez4KGZKAq6qsYV7ajN22SyT8mbV0kjnJQDYf7IaZP7n/12lSoQ==",
+      "sha512": "3eq5cGXbEJkqW9nwLuXwtxy9B5gMA8i7HW4rN63AhAvy5UvEcQbZnve23wx/oPrkyg/4CbfNhxkBezS0b1oUdQ==",
       "type": "package",
       "path": "xunit.runner.visualstudio/2.4.0",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "build/_common/xunit.abstractions.dll",
         "build/_common/xunit.runner.reporters.net452.dll",

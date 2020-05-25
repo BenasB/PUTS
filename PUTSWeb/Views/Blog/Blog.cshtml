@@ -1,4 +1,5 @@
-﻿<link rel="stylesheet" href="~/css/blog.css" />
+﻿@using PUTSWeb.Helpers
+<link rel="stylesheet" href="~/css/blog.css" />
 
 @model Blog
 
@@ -6,4 +7,4 @@
 <h5>@Model.Author</h5>
 <h5>@Model.AddedDate.ToShortDateString()</h5>
 
-<p>@Model.Text</p>
+@Markdown.ParseHtmlString(Model.Text)

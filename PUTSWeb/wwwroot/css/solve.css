@@ -10,6 +10,7 @@ textarea {
     outline: 0px !important;
     -webkit-appearance: none;
     box-shadow: none !important;
+    text-align: justify;
 }
 
 .example-case {
@@ -33,4 +34,10 @@ hr{
 
 .btn-warning{
     float:right;
+}
+
+p {
+    white-space: pre-line;
+    margin-top: 15px;
+    text-align: justify;
 }

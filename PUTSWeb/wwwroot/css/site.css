@@ -14,7 +14,7 @@
 
     .language {
         float: left !important;
-        width:120%;
+        width:100%;
     }
 }
 
@@ -30,4 +30,17 @@
 
 .explanation {
     display: inline;
+}
+
+#cookieConsent .btn{
+    float: unset;
+}
+
+#cookieConsent p {
+    white-space: initial!important;
+}
+
+img {
+    max-width: 1000px;
+    max-height: 500px;
 }

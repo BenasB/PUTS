@@ -4,22 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Processing;
+using PUTSWeb.Areas.Identity.Data;
+using PUTSWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PUTSWeb.Areas.Identity.Data;
-using PUTSWeb.Models;
 
 namespace PUTSWeb.Controllers
 {
     [Authorize]
     public class ProblemController : Controller
     {
-        ProblemDbContext dbContext;
-        readonly IHostingEnvironment hostingEnvironment;
+        private readonly ProblemDbContext dbContext;
+        private readonly IHostingEnvironment hostingEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
 
         const int pageSize = 20;
@@ -31,7 +31,7 @@ namespace PUTSWeb.Controllers
             userManager = userMngr;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Evaluation(int id, string currentSearchString, string searchString, int? pageNumber)
         {
             if (searchString != null)
@@ -186,6 +186,7 @@ namespace PUTSWeb.Controllers
                 return RedirectToAction(nameof(Solve), new { id });
 
             string parentFolderPath = Directory.GetParent(filePath).FullName;
+            
             ResultViewModel viewModel = new ResultViewModel()
             {
                 ProblemID = problem.ProblemID,
@@ -200,6 +201,7 @@ namespace PUTSWeb.Controllers
             if (result.Status == UserProgram.Result.StatusType.Failed)
             {
                 Directory.Delete(parentFolderPath, true);
+
                 return View(viewModel);
             }
 
@@ -209,6 +211,7 @@ namespace PUTSWeb.Controllers
             if (result.Status == UserProgram.Result.StatusType.Failed)
             {
                 Directory.Delete(parentFolderPath, true);
+
                 viewModel.CompilationResult = result;
                 return View(viewModel);
             }
@@ -270,8 +273,11 @@ namespace PUTSWeb.Controllers
                     int bestPercentage = problemResult.BestResult.PercentageResult;
                     gotPerfectPercentage = bestPercentage < 100;
                 }
-                // A unique user solved the problem
-                if (passed == problem.Tests.Count && (!hasProblem || (hasProblem && gotPerfectPercentage)))
+
+                bool isAdmin = await userManager.IsInRoleAsync(currentUser, "Admin");
+
+                // A unique user solved the problem and is not an Admin
+                if (passed == problem.Tests.Count && (!hasProblem || (hasProblem && gotPerfectPercentage)) && !isAdmin)
                 {
                     problem.TimesSolved++;
 
@@ -376,7 +382,10 @@ namespace PUTSWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    ApplicationUser currentUser = await userManager.GetUserAsync(User);
+
                     problem.AddedDate = DateTime.Now;
+                    problem.Author = currentUser.FirstName + " " + currentUser.LastName;
                     dbContext.Problems.Add(problem);
                     await dbContext.SaveChangesAsync();
 
@@ -466,13 +475,13 @@ namespace PUTSWeb.Controllers
                 if (solutionViewModel.SourceFile?.Length > 0)
                 {
                     string randomName = Guid.NewGuid().ToString().Substring(0, 16);
-                    string uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");                 
+                    string uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
                     Directory.CreateDirectory(uploads);
 
                     string folderPath = Path.Combine(uploads, randomName);
                     Directory.CreateDirectory(folderPath);
 
-                    string filePath = Path.Combine(folderPath, randomName + Path.GetExtension(solutionViewModel.SourceFile.FileName));      
+                    string filePath = Path.Combine(folderPath, randomName + Path.GetExtension(solutionViewModel.SourceFile.FileName));
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {

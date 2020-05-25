@@ -132,10 +132,10 @@
   <data name="I found a problem/mistake in the system. What should I do?" xml:space="preserve">
     <value>Radau sistemos problemą/klaidą. Ką man daryti?</value>
   </data>
-  <data name="I get 'program timed out' error message. What should I do?" xml:space="preserve">
-    <value>Gaunu „programa viršijo ribojimo laiką“ klaidos pranešimą. Ką daryti?</value>
+  <data name="I get 'Program timed out' error message. What should I do?" xml:space="preserve">
+    <value>Gaunu „Programa viršijo ribojimo laiką“ klaidos pranešimą. Ką daryti?</value>
   </data>
-  <data name="I have more questions. How should I contact you?" xml:space="preserve">
+  <data name="I have more questions. How can I contact you?" xml:space="preserve">
     <value>Turiu daugiau klausimų. Kaip man susisiekti?</value>
   </data>
   <data name="Is C++11 supported?" xml:space="preserve">
@@ -144,8 +144,8 @@
   <data name="Make sure your program can be compiled on your machine. Check for missing semicolons, programming errors. The error message can help you." xml:space="preserve">
     <value>Įsitikinkite, kad programa susikompiliuoja jūsų įrenginyje. Patikrinkite ar netrūksta kabliataškių, nėra programavimo klaidų. Angliškas klaidos pranešimas gali padėti.</value>
   </data>
-  <data name="Only C/C++" xml:space="preserve">
-    <value>Tik C/C++</value>
+  <data name="Only C/C++." xml:space="preserve">
+    <value>Tik C/C++.</value>
   </data>
   <data name="Only standard input is used. You get data like you get input from the console window, for example using cin." xml:space="preserve">
     <value>Tik standartinę įvestį. Pradinius duomenis gaunate taip pat, kaip gautumėte iš konsolės lango, pavyzdžiui naudojant cin.</value>
@@ -154,7 +154,7 @@
     <value>Tik jūs ir administratoriai gali matyti jūsų rezultatus.</value>
   </data>
   <data name="Report it to bud.benas@gmail.com" xml:space="preserve">
-    <value>Praneškite apie tai e. paštu bud.benas@gmail.com</value>
+    <value>Praneškite apie tai el. paštu bud.benas@gmail.com</value>
   </data>
   <data name="Sign up and head to the problem list by clicking on 'Problems' tab in the navigation panel." xml:space="preserve">
     <value>Užsiregistruokite ir eikite į užduočių sąrašą, kurį galima pasiekti paspaudus „Uždaviniai“ navigacinėje panelėje.</value>
@@ -166,7 +166,7 @@
     <value>Kokios programavimo kalbos palaikomos?</value>
   </data>
   <data name="What to do if the compilation failed?" xml:space="preserve">
-    <value>Ka daryti, jei kompiliacija nesėkminga?</value>
+    <value>Ką daryti, jei kompiliacija nesėkminga?</value>
   </data>
   <data name="What type of input do problems use?" xml:space="preserve">
     <value>Kokia įvestį naudoja uždaviniai?</value>
@@ -175,6 +175,6 @@
     <value>Taip.</value>
   </data>
   <data name="You can send a message to bud.benas@gmail.com" xml:space="preserve">
-    <value>Jūs galite nusiųsti žinutę e. paštu bud.benas@gmail.com</value>
+    <value>Jūs galite nusiųsti žinutę el. paštu bud.benas@gmail.com</value>
   </data>
 </root>

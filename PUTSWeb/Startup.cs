@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -15,15 +16,19 @@ using PUTSWeb.Areas.Identity.Data;
 using PUTSWeb.Helpers;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PUTSWeb
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        IHostingEnvironment environment;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            environment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -36,6 +41,9 @@ namespace PUTSWeb
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(environment.WebRootPath));
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddDbContext<ProblemDbContext>(options => options.UseMySql(Configuration.GetConnectionString("ProblemDatabase")));
@@ -64,7 +72,7 @@ namespace PUTSWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -73,7 +81,7 @@ namespace PUTSWeb
 
             //UpdateDatabase(app);
 
-            if (env.IsDevelopment())
+            if (environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -128,7 +136,7 @@ namespace PUTSWeb
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = { "SuperUser", "Admin", "Member" };
+            string[] roleNames = { "SuperUser", "Admin", "Member", "Moderator" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)

@@ -10,6 +10,8 @@ namespace PUTSWeb.Models
         [Display (Name="ID")]
         public int ProblemID { get; set; }
 
+        public string Author { get; set; }
+
         [Display (Name = "Name")]
         [Required (ErrorMessage = "Please specify the name")]
         public string Name { get; set; }
