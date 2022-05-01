@@ -17,7 +17,10 @@ jobs:
           dotnet-version: 2.1
 
       - name: Switch to PUTSWeb
-        run: cd PUTSWeb
+        run: |
+          pwd
+          cd PUTSWeb
+          pwd
 
       - name: Publish
         run: dotnet publish -c Release -o published PUTSWeb.csproj
