@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 2.1
 
       - name: Publish
-        run: dotnet publish -c Release -o published PUTSWeb.csproj
+        run: dotnet publish -c Release -o published
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -32,5 +32,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/puts:latest
