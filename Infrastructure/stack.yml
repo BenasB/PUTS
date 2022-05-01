@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   puts:
-    image: puts
+    image: benasbudrys/puts
     restart: always
     ports:
       - 8000:80
@@ -14,14 +14,14 @@ services:
       ConnectionStrings__ProblemDatabase: server=db;user=root;password=dbadmin;database=puts
       ASPNETCORE_URLS: http://+:80
   db:
-    image: mariadb
+    image: jsurf/rpi-mariadb
     restart: always
     ports:
       - 8001:3306
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      MARIADB_ROOT_PASSWORD: dbadmin
+      MYSQL_ROOT_PASSWORD: dbadmin
 
   adminer:
     image: adminer
