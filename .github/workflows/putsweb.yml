@@ -38,3 +38,6 @@ jobs:
 
       - name: Start stack
         run: docker-compose -f ../Infrastructure/rpi-stack.yml up
+        env:
+          CONNECTIONSTRINGS__PROBLEMDATABASE: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
+          MYSQL_ROOT_PASSWORD: "${{ secrets.MYSQL_ROOT_PASSWORD }}"
