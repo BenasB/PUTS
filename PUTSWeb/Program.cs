@@ -20,11 +20,7 @@ namespace PUTSWeb
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args)
     {
-      var p = System.Reflection.Assembly.GetEntryAssembly().Location;
-      p = p.Substring(0, p.LastIndexOf(@"\") + 1);
-
       return WebHost.CreateDefaultBuilder(args)
-          .UseContentRoot(p)
           .UseStartup<Startup>();
     }
   }
