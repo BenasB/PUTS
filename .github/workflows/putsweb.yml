@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  Publish docker image:
+  publish-docker-image:
     runs-on: ubuntu-latest
 
     steps:
