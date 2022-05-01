@@ -21,6 +21,7 @@ jobs:
           pwd
           cd PUTSWeb
           pwd
+          ls -l
 
       - name: Publish
         run: dotnet publish -c Release -o published PUTSWeb.csproj
