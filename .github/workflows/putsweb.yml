@@ -31,7 +31,7 @@ jobs:
         run: docker build . -t putsweb
 
       - name: Compose up
-        run: docker-compose -f ../Infrastructure/rpi-stack.yml up
+        run: docker-compose -f ../Infrastructure/rpi-stack.yml --detach up
         env:
-          CONNECTIONSTRINGS__PROBLEMDATABASE: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
+          ConnectionStrings__ProblemDatabase: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
           MYSQL_ROOT_PASSWORD: "${{ secrets.MYSQL_ROOT_PASSWORD }}"
