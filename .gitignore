@@ -3,17 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# EF Core
-[Mm]igrations/
-
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-
-appsettings.json
-aspnetcoreputs-74815bf62ba4.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -335,4 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-key-*.xml
+[Kk]eys/

@@ -1,4 +1,10 @@
-#include <Windows.h>
+#ifdef _WINDOWS
+#include <windows.h>
+#else
+#include <unistd.h>
+#define Sleep(x) usleep((x)*1000)
+#endif
+
 #include <iostream>
 
 int main()
