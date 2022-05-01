@@ -35,6 +35,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
+          path: PUTSWeb
           context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/puts:latest
