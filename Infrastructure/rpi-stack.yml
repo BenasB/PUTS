@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     environment:
-      ConnectionStrings__ProblemDatabase: server=db;user=root;password=dbadmin;database=puts
+      ConnectionStrings__ProblemDatabase
       ASPNETCORE_URLS: http://+:80
   db:
     image: jsurf/rpi-mariadb
@@ -21,7 +21,7 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: dbadmin
+      - MYSQL_ROOT_PASSWORD
 
   adminer:
     image: adminer

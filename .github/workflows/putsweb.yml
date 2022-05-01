@@ -5,13 +5,14 @@ on:
     branches: [master]
 
 jobs:
-  deploy:
+  deployment:
     runs-on: self-hosted
-
+    environment:
+      name: pi
+      url: http://benaspi.ddns.net:8000
     defaults:
       run:
         working-directory: ./PUTSWeb
-
     steps:
       - uses: actions/checkout@v3
 
@@ -20,8 +21,20 @@ jobs:
         with:
           dotnet-version: 2.1
 
+      - name: Build dotnet
+        run: dotnet build
+
       - name: Publish
         run: dotnet publish -c Release -o published
 
       - name: Build docker
         run: docker build . -t putsweb
+
+      - name: Stop stack
+        run: docker-compose -f ../Infrastructure/rpi-stack.yml down
+
+      - name: Pull stack
+        run: docker-compose -f ../Infrastructure/rpi-stack.yml pull
+
+      - name: Start stack
+        run: docker-compose -f ../Infrastructure/rpi-stack.yml up
