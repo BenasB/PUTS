@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,8 +18,14 @@ namespace PUTSWeb
       CreateWebHostBuilder(args).Build().Run();
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>();
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
+      var p = System.Reflection.Assembly.GetEntryAssembly().Location;
+      p = p.Substring(0, p.LastIndexOf(@"\") + 1);
+
+      return WebHost.CreateDefaultBuilder(args)
+          .UseContentRoot(p)
+          .UseStartup<Startup>();
+    }
   }
 }

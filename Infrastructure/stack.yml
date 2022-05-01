@@ -1,6 +1,18 @@
 version: "3.1"
 
 services:
+  puts:
+    image: puts
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - keys:/app/Keys
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__ProblemDatabase: server=db;user=root;password=dbadmin;database=puts
+      ASPNETCORE_URLS: http://+:80
   db:
     image: mariadb
     restart: always
@@ -19,3 +31,4 @@ services:
 
 volumes:
   db-data:
+  keys:
