@@ -30,14 +30,7 @@ jobs:
       - name: Build docker
         run: docker build . -t putsweb
 
-      - name: Stop stack
-        working-directory: ./Infrastructure
-        run: docker-compose -f rpi-stack.yml down
-
-      - name: Pull stack
-        run: docker-compose -f ../Infrastructure/rpi-stack.yml pull
-
-      - name: Start stack
+      - name: Compose up
         run: docker-compose -f ../Infrastructure/rpi-stack.yml up
         env:
           CONNECTIONSTRINGS__PROBLEMDATABASE: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
