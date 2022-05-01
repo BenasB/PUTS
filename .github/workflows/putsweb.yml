@@ -8,6 +8,10 @@ jobs:
   publish-docker-image:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./PUTSWeb
+
     steps:
       - uses: actions/checkout@v3
 
@@ -15,13 +19,6 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 2.1
-
-      - name: Switch to PUTSWeb
-        run: |
-          pwd
-          cd PUTSWeb
-          pwd
-          ls -l
 
       - name: Publish
         run: dotnet publish -c Release -o published PUTSWeb.csproj
