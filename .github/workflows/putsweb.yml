@@ -31,7 +31,8 @@ jobs:
         run: docker build . -t putsweb
 
       - name: Stop stack
-        run: docker-compose -f ../Infrastructure/rpi-stack.yml down
+        working-directory: ./Infrastructure
+        run: docker-compose -f rpi-stack.yml down
 
       - name: Pull stack
         run: docker-compose -f ../Infrastructure/rpi-stack.yml pull
