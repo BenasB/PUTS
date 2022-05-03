@@ -18,7 +18,7 @@ namespace Processing
       public string Message { get; set; }
     }
 
-    static readonly string[] AllowedExtentions = { ".cpp", ".c" };
+    public static readonly string[] AllowedExtentions = { ".cpp", ".c" };
     const int timeoutInterval = 2000;
 
     string sourceFilePath;
