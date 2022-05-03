@@ -2,7 +2,7 @@
     $(".input-file").before(
         function () {
             if (!$(this).prev().hasClass('input-ghost')) {
-                var element = $("<input type='file' name='SourceFile' accept='.cpp' class='input-ghost' style='visibility:hidden; height:0'>"); // TODO: don't hardcode .cpp
+                var element = $("<input type='file' name='SourceFile' accept='.cpp,.c' class='input-ghost' style='visibility:hidden; height:0'>"); // TODO: don't hardcode .cpp
                 element.attr("name", $(this).attr("name"));
                 element.change(function () {
                     element.next(element).find('input').val((element.val()).split('\\').pop());

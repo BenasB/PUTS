@@ -18,7 +18,7 @@ namespace Processing
       public string Message { get; set; }
     }
 
-    const string allowedExtention = ".cpp";
+    static readonly string[] AllowedExtentions = { ".cpp", ".c" };
     const int timeoutInterval = 2000;
 
     string sourceFilePath;
@@ -31,7 +31,7 @@ namespace Processing
     {
       if (File.Exists(filePath))
       {
-        if (Path.HasExtension(filePath) && Path.GetExtension(filePath).Equals(allowedExtention))
+        if (Path.HasExtension(filePath) && AllowedExtentions.Any(extension => extension.Equals(Path.GetExtension(filePath))))
         {
           sourceFilePath = filePath;
           return new Result { Status = Result.StatusType.Successful, Message = "Source file set" };
