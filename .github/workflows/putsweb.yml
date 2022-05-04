@@ -71,15 +71,8 @@ jobs:
 
       - name: Compose up 🚀
         uses: appleboy/ssh-action@master
-        env:
-          ConnectionStrings__ProblemDatabase: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
-          MYSQL_ROOT_PASSWORD: "${{ secrets.MYSQL_ROOT_PASSWORD }}"
         with:
           host: ${{ secrets.RPI_HOST }}
           username: ${{ secrets.RPI_USERNAME }}
           password: ${{ secrets.RPI_PASSWORD }}
-          envs: ConnectionStrings__ProblemDatabase,MYSQL_ROOT_PASSWORD
-          script: |
-            echo "I am $ConnectionStrings__ProblemDatabase"
-            echo "I am $MYSQL_ROOT_PASSWORD"
-            docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
+          script: ConnectionStrings__ProblemDatabase=${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }} MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
