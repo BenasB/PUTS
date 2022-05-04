@@ -48,7 +48,6 @@ namespace PUTSWeb
           .SetApplicationName("PUTS");
 
       services.AddLocalization(options => options.ResourcesPath = "Resources");
-      Console.WriteLine("============================= CONTECTION STRING=" + Configuration.GetConnectionString("ProblemDatabase"));
       services.AddDbContext<ProblemDbContext>(options => options.UseMySql(Configuration.GetConnectionString("ProblemDatabase")));
       services.AddSingleton<IValidationAttributeAdapterProvider, CustomValidationAttributeAdapterProvider>();
 

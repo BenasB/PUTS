@@ -76,8 +76,8 @@ jobs:
           username: ${{ secrets.RPI_USERNAME }}
           password: ${{ secrets.RPI_PASSWORD }}
           script: |
-            export ConnectionStrings__ProblemDatabase="${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}""
-            export MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}""
+            export ConnectionStrings__ProblemDatabase="${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
+            export MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}"
             docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
 
       - name: Check running containers 🔍
