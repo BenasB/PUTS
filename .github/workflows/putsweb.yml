@@ -3,35 +3,77 @@ name: PUTSWeb
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
-  deployment:
-    runs-on: self-hosted
-    environment:
-      name: pi
-      url: http://benaspi.ddns.net:8000
+  # deployment:
+  #   name: Build and deploy docker stack on Raspberry Pi
+  #   runs-on: self-hosted
+  #   environment:
+  #     name: pi
+  #     url: http://benaspi.ddns.net:8000
+  #   defaults:
+  #     run:
+  #       working-directory: ./PUTSWeb
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - name: Setup .NET
+  #       uses: actions/setup-dotnet@v2
+  #       with:
+  #         dotnet-version: 2.1
+
+  #     - name: Build dotnet
+  #       run: dotnet build
+
+  #     - name: Publish
+  #       run: dotnet publish -c Release -o published
+
+  #     - name: Build docker
+  #       run: docker build . -t putsweb
+
+  #     - name: Compose up
+  #       run: docker-compose -f ../Infrastructure/rpi-stack.yml up -d
+  #       env:
+  #         ConnectionStrings__ProblemDatabase: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
+  #         MYSQL_ROOT_PASSWORD: "${{ secrets.MYSQL_ROOT_PASSWORD }}"
+
+  docker-image:
+    name: Build and publish docker image
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./PUTSWeb
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: Setup .NET 🌐
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: 2.1
 
-      - name: Build dotnet
+      - name: Build dotnet 🔧
         run: dotnet build
 
-      - name: Publish
+      - name: Publish 📦
         run: dotnet publish -c Release -o published
 
-      - name: Build docker
-        run: docker build . -t putsweb
+      - name: Set up QEMU 🔨
+        uses: docker/setup-qemu-action@v1
 
-      - name: Compose up
-        run: docker-compose -f ../Infrastructure/rpi-stack.yml up -d
-        env:
-          ConnectionStrings__ProblemDatabase: "${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
-          MYSQL_ROOT_PASSWORD: "${{ secrets.MYSQL_ROOT_PASSWORD }}"
+      - name: Set up Docker Buildx 🪛
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub 🐋
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and push 🔼
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/arm/v7
