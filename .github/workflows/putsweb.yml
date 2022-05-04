@@ -77,3 +77,5 @@ jobs:
         with:
           context: ./PUTSWeb/
           platforms: linux/arm/v7
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/putsweb:latest
