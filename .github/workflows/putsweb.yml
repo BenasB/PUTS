@@ -50,7 +50,7 @@ jobs:
 
   deploy-rpi:
     name: Deploy stack to raspberry pi
-    #needs: docker-image
+    needs: docker-image
     runs-on: ubuntu-latest
     environment:
       name: pi
@@ -79,3 +79,11 @@ jobs:
             export ConnectionStrings__ProblemDatabase=${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}
             export MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
             docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
+
+      - name: Check running containers 🔍
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.RPI_HOST }}
+          username: ${{ secrets.RPI_USERNAME }}
+          password: ${{ secrets.RPI_PASSWORD }}
+          script: docker ps -a
