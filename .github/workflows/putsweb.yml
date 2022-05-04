@@ -50,13 +50,11 @@ jobs:
 
   deploy-rpi:
     name: Deploy stack to raspberry pi
-    runs-on: ubuntu-latest
+    needs: docker-image
+    #runs-on: ubuntu-latest
     environment:
       name: pi
       url: http://benaspi.ddns.net:8000
-    defaults:
-      run:
-        working-directory: ./Infrastructure
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -67,7 +65,7 @@ jobs:
           host: ${{ secrets.RPI_HOST }}
           username: ${{ secrets.RPI_USERNAME }}
           password: ${{ secrets.RPI_PASSWORD }}
-          source: "rpi-stack.yml"
+          source: "Infrastructure/rpi-stack.yml"
           target: "~/stacks/putsweb/"
 
       - name: Compose up 🚀
