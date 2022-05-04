@@ -50,7 +50,7 @@ jobs:
 
   deploy-rpi:
     name: Deploy stack to raspberry pi
-    needs: docker-image
+    #needs: docker-image
     runs-on: ubuntu-latest
     environment:
       name: pi
