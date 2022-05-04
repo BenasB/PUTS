@@ -2,8 +2,7 @@ version: "3.1"
 
 services:
   puts:
-    image: putsweb
-    restart: always
+    image: benasbudrys/putsweb
     ports:
       - 8000:80
     volumes:
@@ -15,7 +14,6 @@ services:
       ASPNETCORE_URLS: http://+:80
   db:
     image: jsurf/rpi-mariadb
-    restart: always
     ports:
       - 8001:3306
     volumes:
@@ -25,7 +23,6 @@ services:
 
   adminer:
     image: adminer
-    restart: always
     ports:
       - 8002:8080
 
