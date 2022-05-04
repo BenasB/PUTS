@@ -5,7 +5,7 @@ services:
     image: mariadb
     restart: always
     ports:
-      - 8001:3306
+      - 8002:3306
     volumes:
       - db-data:/var/lib/mysql
     environment:
@@ -15,7 +15,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8002:8080
+      - 8003:8080
 
 volumes:
   db-data:
