@@ -77,5 +77,5 @@ jobs:
           host: ${{ secrets.RPI_HOST }}
           username: ${{ secrets.RPI_USERNAME }}
           password: ${{ secrets.RPI_PASSWORD }}
-          script: docker-compose -f "~/stacks/putsweb/rpi-stack.yml" up -d
+          script: docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
           envs: ConnectionStrings__ProblemDatabase,MYSQL_ROOT_PASSWORD
