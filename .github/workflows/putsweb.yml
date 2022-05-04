@@ -50,7 +50,7 @@ jobs:
 
   deploy-rpi:
     name: Deploy stack to raspberry pi
-    #needs: docker-image
+    needs: docker-image
     runs-on: ubuntu-latest
     environment:
       name: pi
@@ -67,6 +67,7 @@ jobs:
           password: ${{ secrets.RPI_PASSWORD }}
           source: "Infrastructure/rpi-stack.yml"
           target: "~/stacks/putsweb/"
+          strip_components: 1
 
       - name: Compose up 🚀
         uses: appleboy/ssh-action@master
