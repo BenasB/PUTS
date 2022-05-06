@@ -8,6 +8,7 @@ services:
       - 8000:5001
     volumes:
       - keys:/app/Keys
+      - ~/.aspnet/https:/https:ro
     depends_on:
       - db
     environment:
