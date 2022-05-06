@@ -85,7 +85,7 @@ namespace PUTSWeb
       else
       {
         app.UseExceptionHandler("/Home/Error");
-        //app.UseHsts();
+        app.UseHsts();
       }
 
       var supportedCultures = new[]
@@ -101,7 +101,7 @@ namespace PUTSWeb
         SupportedUICultures = supportedCultures
       });
 
-      //app.UseHttpsRedirection();
+      app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseAuthentication();
       app.UseCookiePolicy();
