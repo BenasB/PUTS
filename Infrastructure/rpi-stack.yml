@@ -5,7 +5,8 @@ services:
     image: benasbudrys/putsweb
     restart: always
     ports:
-      - 8000:80
+      - 80
+      - 443
     volumes:
       - keys:/app/Keys
     depends_on:

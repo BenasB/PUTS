@@ -76,11 +76,6 @@ namespace PUTSWeb
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
     {
-      app.UseForwardedHeaders(new ForwardedHeadersOptions
-      {
-        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-      });
-
       UpdateDatabase(app);
 
       if (environment.IsDevelopment())
@@ -90,7 +85,7 @@ namespace PUTSWeb
       else
       {
         app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
+        //app.UseHsts();
       }
 
       var supportedCultures = new[]
@@ -106,7 +101,7 @@ namespace PUTSWeb
         SupportedUICultures = supportedCultures
       });
 
-      app.UseHttpsRedirection();
+      //app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseAuthentication();
       app.UseCookiePolicy();
