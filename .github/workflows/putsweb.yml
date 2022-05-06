@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and push 🔼
+      - name: Build and push ⬆️
         uses: docker/build-push-action@v2
         with:
           context: ./PUTSWeb/
@@ -69,6 +69,14 @@ jobs:
           target: "~/stacks/putsweb/"
           strip_components: 1
 
+      - name: Compose pull ⬇️
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.RPI_HOST }}
+          username: ${{ secrets.RPI_USERNAME }}
+          password: ${{ secrets.RPI_PASSWORD }}
+          script: docker-compose -f ~/stacks/putsweb/rpi-stack.yml pull
+
       - name: Compose up 🚀
         uses: appleboy/ssh-action@master
         with:
@@ -78,6 +86,8 @@ jobs:
           script: |
             export ConnectionStrings__ProblemDatabase="${{ secrets.CONNECTIONSTRINGS__PROBLEMDATABASE }}"
             export MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}"
+            export ASPNETCORE_Kestrel__Certificates__Default__Password="${{ secrets.ASPNETCORE_KESTREL__CERTIFICATES__DEFAULT__PASSWORD }}"
+            export ASPNETCORE_Kestrel__Certificates__Default__Path="${{ secrets.ASPNETCORE_KESTREL__CERTIFICATES__DEFAULT__PATH }}"
             docker-compose -f ~/stacks/putsweb/rpi-stack.yml up -d
 
       - name: Check running containers 🔍
